@@ -10,9 +10,9 @@ import { MdAccountBalanceWallet } from "react-icons/md";
 import { MdOutlineHandyman } from "react-icons/md";
 import { MdInfo } from "react-icons/md";
 import { MdAccountBalance } from "react-icons/md";
-import { MdWbSunny } from "react-icons/md";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+
 
 function Sidebar() {
     const [activePage, setActivePage] = useState("Home");
@@ -27,8 +27,8 @@ function Sidebar() {
     }, [router.pathname])
 
     return (
-        <div className='scrollbar bg-[#1d1a25] flex justify-between items-center flex-col sticky top-5 h-[93vh] rounded-xl'>
-            <div className=''>
+        <div className=''>
+                <div className='scrollbar bg-[#1d1a25] flex justify-between items-center flex-col sticky top-5 h-[93vh] rounded-xl'>
                 <div className=' justify-center items-center flex p-2'>
                     <Link href="/">
                         <img src='/thirdfundinglogo.png' className='w-[52px] h-[52px] rounded-xl' />
