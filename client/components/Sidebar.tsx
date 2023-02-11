@@ -10,6 +10,7 @@ import { MdAccountBalanceWallet } from "react-icons/md";
 import { MdOutlineHandyman } from "react-icons/md";
 import { MdInfo } from "react-icons/md";
 import { MdAccountBalance } from "react-icons/md";
+import { MdWbSunny } from "react-icons/md";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
@@ -34,7 +35,7 @@ function Sidebar() {
                     </Link>
                 </div>
                 <div className='flex-1 flex flex-col justify-between items-center bg-[#1c1c24 rounded-[20px] w-[76px] py-4 '>
-                    <div className='flex flex-col space-y-3'>
+                    <div className='flex flex-col space-y-4 justify-between'>
                         <Link href={"/Home"}>
                             <SidebarTile Icon={MdHomeFilled} title={"Home"} page={activePage} />
                         </Link>
