@@ -19,7 +19,7 @@ function Navbar() {
             </div>
             <div className='flex-row flex justify-between items-center'>
                 <ConnectWallet accentColor={"#8c6dfd"} />
-                <MdWbSunny className={`h-12 w-12 text-[#8c6dfd] border border-[#8c6dfd] rounded-lg m-1 p-2 `} />
+                <MdWbSunny className={`h-12 w-12 text-[#8c6dfd] border border-[#8c6dfd] hover:text-[#6e46fe] hover:border-[#6e46fe] rounded-lg m-1 p-2 `} />
             </div>
         </div>
     )
