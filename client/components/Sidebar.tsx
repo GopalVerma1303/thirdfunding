@@ -35,13 +35,13 @@ function Sidebar() {
                         <img src='/thirdfundinglogo.png' className='w-[52px] h-[52px] rounded-xl' />
                     </Link>
                 </div>
-                <div className='flex-1 flex flex-col justify-between items-center bg-[#1c1c24 rounded-[20px] w-[76px] py-4 '>
+                <div className=' flex-1 flex flex-col justify-between items-center bg-[#1c1c24 rounded-[20px] w-[76px] py-4 '>
                     <div className='flex flex-col space-y-3 justify-between'>
                         <Link href={"/Home"}>
                             <SidebarTile Icon={MdHomeFilled} title={"Home"} page={activePage} />
                         </Link>
-                        <Link href={"/StartCampaign"}>
-                            <SidebarTile Icon={MdFlag} title={"StartCampaign"} page={activePage} />
+                        <Link href={"/Start"}>
+                            <SidebarTile Icon={MdFlag} title={"Start"} page={activePage} />
                         </Link>
                         <Link href={"/Explore"}>
                             <SidebarTile Icon={MdExplore} title={"Explore"} page={activePage} />
@@ -67,9 +67,6 @@ function Sidebar() {
                         <Link href={"/Legal"}>
                             <SidebarTile Icon={MdAccountBalance} title={"Legal"} page={activePage} />
                         </Link>
-                        <div className={`flex item-center transition-all duration-200 hover:bg-[#2e2f35] hover:cursor-pointer p-2 rounded-xl space-x-3`}>
-                            <MdWbSunny className={`h-6 w-6 text-[#4acd8d]`} />
-                        </div>
                     </div>
                     <div>
 
