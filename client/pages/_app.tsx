@@ -16,10 +16,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         </div>
         <div className='flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5'>
           <Navbar />
-        </div>
-        {/* <div className='flex-col w-full h-full'>
           <Component {...pageProps} />
-        </div> */}
+        </div>
       </div>
     </ThirdwebProvider>
 
