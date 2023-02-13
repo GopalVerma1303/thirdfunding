@@ -1180,10 +1180,10 @@
   "resolved" "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.10.tgz"
   "version" "4.2.10"
 
-"hardhat@^2.10.1":
-  "integrity" "sha512-0Ent1O5DsPgvaVb5sxEgsQ3bJRt/Ex92tsoO+xjoNH2Qc4bFmhI5/CHVlFikulalxOPjNmw5XQ2vJFuVQFESAA=="
-  "resolved" "https://registry.npmjs.org/hardhat/-/hardhat-2.12.6.tgz"
-  "version" "2.12.6"
+"hardhat@^2.12.7":
+  "integrity" "sha512-voWoN6zn5d8BOEaczSyK/1PyfdeOeI3SbGCFb36yCHTJUt6OIqLb+ZDX30VhA1UsYKzLqG7UnWl3fKJUuANc6A=="
+  "resolved" "https://registry.npmjs.org/hardhat/-/hardhat-2.12.7.tgz"
+  "version" "2.12.7"
   dependencies:
     "@ethersproject/abi" "^5.1.2"
     "@metamask/eth-sig-util" "^4.0.0"
