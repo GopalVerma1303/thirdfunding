@@ -17,6 +17,7 @@ import { MdInfo } from "react-icons/md";
 import { MdAccountBalance } from "react-icons/md";
 import { useRouter } from 'next/router';
 import Searchbar from './Searchbar';
+import MiniSearchbar from './MiniSearchbar';
 
 function Navbar() {
     const address = "";
@@ -64,6 +65,9 @@ function Navbar() {
                             <MdMenu onClick={() => setToggleDrawer(!toggleDrawer)} className={`h-6 w-6 text-[#4acd8d]`} />
                             <div className={`absolute top-[70px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4 transition-all duration-700 ${!toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"}`}>
                                 <ul className="mb-4 px-2">
+                                    <li className='px-4'>
+                                        <MiniSearchbar />
+                                    </li>
                                     <li className='p-4'>
                                         <ConnectWallet accentColor={"#8c6dfd"} />
                                     </li>
