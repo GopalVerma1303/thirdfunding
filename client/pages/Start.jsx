@@ -1,47 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ethers } from "ethers";
 import CustomButton from '../components/CustomButton';
 import FormField from '../components/FormField';
 import { SiBitcoin } from "react-icons/si";
-import { useStateContext } from '../context';
+import { useStateContext } from '../context'
 import { checkIfImage } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
-interface Props {
-  fieldName: any,
-  e: any
-}
-
 function Start() {
-  
+
   const [isLoading, setIsLoading] = useState(false);
+  const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
     name: "",
     title: "",
     description: "",
+    category: "",
     target: "",
     deadline: "",
     image: ""
   });
 
-  const { createCampaign } = useStateContext();
-
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    checkIfImage(form.image, async (exists: any) => {
+    checkIfImage(form.image, async (exists) => {
       if (exists) {
-        setIsLoading(true)
-        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) })
+        setIsLoading(true);
+        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) });
         setIsLoading(false);
-        alert("Campaign Created");
       } else {
-        alert('Provide valid image URL')
+        alert("Provide valid image URL")
         setForm({ ...form, image: '' });
       }
     })
   }
 
-  const handleFormFieldChange = ({ fieldName, e }: Props) => {
+  const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value })
   }
 
@@ -60,7 +54,7 @@ function Start() {
             placeholder="Write your name"
             inputType="text"
             value={form.name}
-            handleChange={(e: any) => { handleFormFieldChange({ fieldName: "name", e }) }}
+            handleChange={(e) => handleFormFieldChange("name", e)}
             isTextArea={false} />
 
           <FormField
@@ -68,7 +62,7 @@ function Start() {
             placeholder="Write a title"
             inputType="text"
             value={form.title}
-            handleChange={(e: any) => { handleFormFieldChange({ fieldName: "title", e }) }}
+            handleChange={(e) => handleFormFieldChange("title", e)}
             isTextArea={false} />
 
           <FormField
@@ -76,8 +70,16 @@ function Start() {
             placeholder="Write your story"
             inputType="text"
             value={form.description}
-            handleChange={(e: any) => { handleFormFieldChange({ fieldName: "description", e }) }}
+            handleChange={(e) => handleFormFieldChange("description", e)}
             isTextArea={true} />
+
+          <FormField
+            lableName="Category *"
+            placeholder="Select category for your campaign"
+            inputType="text"
+            value={form.category}
+            handleChange={(e) => handleFormFieldChange("category", e)}
+            isTextArea={false} />
 
           <div className='w-full flex justify-start items-center p-4 sm:pl-10 bg-[#8c6dfd] h-[120px] rounded-[10px]'>
             <SiBitcoin className='text-white w-16 h-16 object-contain' />
@@ -89,7 +91,7 @@ function Start() {
             placeholder="ETH 0.50"
             inputType="text"
             value={form.target}
-            handleChange={(e: any) => { handleFormFieldChange({ fieldName: "target", e }) }}
+            handleChange={(e) => handleFormFieldChange("target", e)}
             isTextArea={false} />
 
           <FormField
@@ -97,7 +99,7 @@ function Start() {
             placeholder=""
             inputType="date"
             value={form.deadline}
-            handleChange={(e: any) => { handleFormFieldChange({ fieldName: "deadline", e }) }}
+            handleChange={(e) => handleFormFieldChange("deadline", e)}
             isTextArea={false} />
 
           <FormField
@@ -105,7 +107,7 @@ function Start() {
             placeholder="Place image URL of your campaign"
             inputType="url"
             value={form.image}
-            handleChange={(e: any) => { handleFormFieldChange({ fieldName: "image", e }) }}
+            handleChange={(e) => handleFormFieldChange("image", e)}
             isTextArea={false} />
 
           <div className='flex justify-center items-center mt-[40px]'>
