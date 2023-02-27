@@ -3,6 +3,9 @@ import { ethers } from "ethers";
 import CustomButton from '../components/CustomButton';
 import FormField from '../components/FormField';
 import { SiBitcoin } from "react-icons/si";
+import { useStateContext } from '../context';
+import { checkIfImage } from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   fieldName: any,
@@ -10,7 +13,7 @@ interface Props {
 }
 
 function Start() {
-
+  
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -21,9 +24,21 @@ function Start() {
     image: ""
   });
 
+  const { createCampaign } = useStateContext();
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(e);
+    checkIfImage(form.image, async (exists: any) => {
+      if (exists) {
+        setIsLoading(true)
+        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) })
+        setIsLoading(false);
+        alert("Campaign Created");
+      } else {
+        alert('Provide valid image URL')
+        setForm({ ...form, image: '' });
+      }
+    })
   }
 
   const handleFormFieldChange = ({ fieldName, e }: Props) => {
