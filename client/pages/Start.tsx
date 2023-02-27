@@ -23,7 +23,7 @@ function Start() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(form);
+    console.log(e);
   }
 
   const handleFormFieldChange = ({ fieldName, e }: Props) => {
