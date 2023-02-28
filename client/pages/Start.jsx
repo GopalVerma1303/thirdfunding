@@ -12,31 +12,32 @@ function Start() {
   const [isLoading, setIsLoading] = useState(false);
   const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
-    name: "",
-    title: "",
-    description: "",
-    category: "",
-    target: "",
-    deadline: "",
-    image: ""
+    name: '',
+    title: '',
+    description: '',
+    target: '',
+    deadline: '',
+    image: ''
   });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    checkIfImage(form.image, async (exists) => {
-      if (exists) {
-        setIsLoading(true);
-        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) });
-        setIsLoading(false);
-      } else {
-        alert("Provide valid image URL")
-        setForm({ ...form, image: '' });
-      }
-    })
-  }
 
   const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    checkIfImage(form.image, async (exists) => {
+      if (exists) {
+        setIsLoading(true)
+        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) })
+        setIsLoading(false);
+        navigate('/');
+      } else {
+        alert('Provide valid image URL')
+        setForm({ ...form, image: '' });
+      }
+    })
   }
 
   return (
@@ -111,7 +112,7 @@ function Start() {
             isTextArea={false} />
 
           <div className='flex justify-center items-center mt-[40px]'>
-            <CustomButton btnType="submit" title="Submit new campaign" handleClick={handleSubmit} styles="bg-[#1dc071]" />
+            <CustomButton btnType="submit" title="Submit new campaign" styles="bg-[#1dc071]" />
           </div>
         </div>
       </form>
