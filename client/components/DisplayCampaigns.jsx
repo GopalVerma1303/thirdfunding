@@ -1,11 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { SpinnerCircular } from 'spinners-react';
 import FundCard from './FundCard';
 import { loader } from '../assets';
-import loading from '../assets';
-
-import { AiOutlineCloudDownload } from "react-icons/ai";
+import { loading } from '../assets/loading.gif';
 
 const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
@@ -19,7 +17,10 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
             <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{title} ({campaigns.length})</h1>
 
             <div className="flex flex-wrap mt-[20px] gap-[26px]">
-                {isLoading && (<><AiOutlineCloudDownload className='text-white' /></>)}
+
+                {isLoading && (
+                    <SpinnerCircular enabled={true} className="text-[#4acd8d]" />
+                )}
 
                 {!isLoading && campaigns.length === 0 && (
                     <p className="font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]">
