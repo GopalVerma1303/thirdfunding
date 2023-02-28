@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import { StateContextProvider } from '../context'
 
-const activeChainId = ChainId.Mainnet;
+const activeChainId = ChainId.Mumbai;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,13 +13,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThirdwebProvider desiredChainId={activeChainId}>
       <div className=' relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row'>
         <StateContextProvider>
-        <div className='sm:flex hidden mr-10 relative'>
-          <Sidebar />
-        </div>
-        <div className='flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5'>
-          <Navbar />
-          <Component {...pageProps} />
-        </div>
+          <div className='sm:flex hidden mr-10 relative'>
+            <Sidebar />
+          </div>
+          <div className='flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5'>
+            <Navbar />
+            <Component {...pageProps} />
+          </div>
         </StateContextProvider>
       </div>
     </ThirdwebProvider>

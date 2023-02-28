@@ -3845,6 +3845,11 @@
   "resolved" "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   "version" "1.0.0"
 
+"svg-loader@^0.0.2":
+  "integrity" "sha512-otmaUALijTGJJpvPVTHhHIzseEsrB7DyJJxygb0XkiZPeJT9t+PiK7tDT9YWSUDqHqqqutTqF0ldXth/+T72wg=="
+  "resolved" "https://registry.npmjs.org/svg-loader/-/svg-loader-0.0.2.tgz"
+  "version" "0.0.2"
+
 "tailwind-scrollbar@^2.1.0":
   "integrity" "sha512-zpvY5mDs0130YzYjZKBiDaw32rygxk5RyJ4KmeHjGnwkvbjm/PszON1m4Bbt2DkMRIXlXsfNevykAESgURN4KA=="
   "resolved" "https://registry.npmjs.org/tailwind-scrollbar/-/tailwind-scrollbar-2.1.0.tgz"
