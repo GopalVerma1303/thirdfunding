@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app'
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import { StateContextProvider } from '../context'
 
 const activeChainId = ChainId.Mainnet;
 
@@ -12,7 +11,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     <ThirdwebProvider desiredChainId={activeChainId}>
       <div className=' relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row'>
-        <StateContextProvider>
         <div className='sm:flex hidden mr-10 relative'>
           <Sidebar />
         </div>
@@ -20,7 +18,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Navbar />
           <Component {...pageProps} />
         </div>
-        </StateContextProvider>
       </div>
     </ThirdwebProvider>
 

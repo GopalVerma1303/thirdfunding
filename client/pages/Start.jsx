@@ -3,14 +3,13 @@ import { ethers } from "ethers";
 import CustomButton from '../components/CustomButton';
 import FormField from '../components/FormField';
 import { SiBitcoin } from "react-icons/si";
-import { useStateContext } from '../context'
 import { checkIfImage } from '../utils';
 import { useNavigate } from 'react-router-dom';
+import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
 
 function Start() {
 
   const [isLoading, setIsLoading] = useState(false);
-  const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
     name: "",
     title: "",
@@ -23,20 +22,34 @@ function Start() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    checkIfImage(form.image, async (exists) => {
-      if (exists) {
-        setIsLoading(true);
-        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) });
-        setIsLoading(false);
-      } else {
-        alert("Provide valid image URL")
-        setForm({ ...form, image: '' });
-      }
-    })
+    await call({ ...form, target: ethers.utils.parseUnits(form.target, 18) });
+    // checkIfImage(form.image, async (exists) => {
+    //   if (exists) {
+    //     setIsLoading(true);
+    //     await call({ ...form, target: ethers.utils.parseUnits(form.target, 18) });
+    //     setIsLoading(false);
+    //   } else {
+    //     alert("Provide valid image URL")
+    //     setForm({ ...form, image: '' });
+    //   }
+    // })
   }
 
   const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value })
+  }
+
+  const { contract } = useContract("0x6F42d7a993BCd27854ff6de9827e579397dc51F1");
+  const { mutateAsync: createCampaign } = useContractWrite(contract, "createCampaign");
+  const address = useAddress();
+
+  const call = async (form) => {
+    try {
+      const data = await createCampaign([address, form.title, form.description, form.category, form.target, new Date(form.deadline).getTime(), form.image]);
+      console.info("contract call successs", data);
+    } catch (err) {
+      console.error("contract call failure", err);
+    }
   }
 
   return (
