@@ -9,7 +9,7 @@ function News() {
             <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">News</h1>
             <div className="flex flex-wrap">
                 {
-                    news.data.map(e => (
+                    news.data.reverse().map(e => (
                         <NewsTile
                             author={e.author}
                             title={e.title}
@@ -22,7 +22,6 @@ function News() {
                             country={e.country}
                             published_at={e.published_at}
                         />
-                        // <div className='w-full bg-red-50'>ssssssssssssssssssssssssssssssssssssssssssssssssssssssl</div>
                     ))
                 }
             </div>

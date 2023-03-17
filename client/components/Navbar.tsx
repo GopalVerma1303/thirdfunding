@@ -18,6 +18,7 @@ import { MdAccountBalance } from "react-icons/md";
 import { useRouter } from 'next/router';
 import Searchbar from './Searchbar';
 import MiniSearchbar from './MiniSearchbar';
+import { MdNewspaper } from "react-icons/md";
 
 function Navbar() {
     const address = "";
@@ -92,8 +93,8 @@ function Navbar() {
                                         </Link>
                                     </li>
                                     <li onClick={() => setToggleDrawer(!toggleDrawer)}>
-                                        <Link href={"/Blog"}>
-                                            <SidebarTile Icon={MdLibraryBooks} title={"Blog"} page={activePage} />
+                                        <Link href={"/News"}>
+                                            <SidebarTile Icon={MdNewspaper} title={"News"} page={activePage} />
                                         </Link>
                                     </li>
                                     <li onClick={() => setToggleDrawer(!toggleDrawer)}>
