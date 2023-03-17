@@ -45,9 +45,6 @@ function Navbar() {
                     <div className='flex-row justify-center items-center hidden sm:flex'>
                         <ConnectWallet accentColor={"#8c6dfd"} />
                     </div>
-                    <div className={`w-[52px] h-[52px] mx-1 flex item-center transition-all duration-200 hover:bg-[#2e2f35] hover:cursor-pointer rounded-xl justify-center items-center`}>
-                        <MdWbSunny className={`h-6 w-6 text-[#8c6dfd]`} />
-                    </div>
                 </div>
             </div>
 
@@ -103,26 +100,10 @@ function Navbar() {
                                         </Link>
                                     </li>
                                     <li onClick={() => setToggleDrawer(!toggleDrawer)}>
-                                        <Link href={"/Wallet"}>
-                                            <SidebarTile Icon={MdAccountBalanceWallet} title={"Wallet"} page={activePage} />
-                                        </Link>
-                                    </li>
-                                    <li onClick={() => setToggleDrawer(!toggleDrawer)}>
-                                        <Link href={"/Support"}>
-                                            <SidebarTile Icon={MdOutlineHandyman} title={"Support"} page={activePage} />
-                                        </Link>
-                                    </li>
-                                    <li onClick={() => setToggleDrawer(!toggleDrawer)}>
                                         <Link href={"/About"}>
                                             <SidebarTile Icon={MdInfo} title={"About"} page={activePage} />
                                         </Link>
                                     </li>
-                                    <li onClick={() => setToggleDrawer(!toggleDrawer)}>
-                                        <Link href={"/Legal"}>
-                                            <SidebarTile Icon={MdAccountBalance} title={"Legal"} page={activePage} />
-                                        </Link>
-                                    </li>
-
                                 </ul>
                             </div>
                         </div>

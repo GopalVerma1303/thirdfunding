@@ -55,21 +55,12 @@ function Sidebar() {
                         <Link href={"/Profile"}>
                             <SidebarTile Icon={MdPerson} title={"Profile"} page={activePage} />
                         </Link>
-                        <Link href={"/Wallet"}>
-                            <SidebarTile Icon={MdAccountBalanceWallet} title={"Wallet"} page={activePage} />
-                        </Link>
-                        <Link href={"/Support"}>
-                            <SidebarTile Icon={MdOutlineHandyman} title={"Support"} page={activePage} />
-                        </Link>
                         <Link href={"/About"}>
                             <SidebarTile Icon={MdInfo} title={"About"} page={activePage} />
                         </Link>
-                        <Link href={"/Legal"}>
-                            <SidebarTile Icon={MdAccountBalance} title={"Legal"} page={activePage} />
-                        </Link>
                     </div>
-                    <div>
-
+                    <div className={`w-[52px] h-[52px] mx-1 flex item-center transition-all duration-200 hover:bg-[#2e2f35] hover:cursor-pointer rounded-full justify-center items-center`}>
+                        <MdWbSunny className={`h-6 w-6 text-[#4acd8d]`} />
                     </div>
                 </div>
             </div>

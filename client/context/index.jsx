@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useEffect } from 'react';
-import { useAddress, useContract, useMetamask, useContractWrite, useContractMetadata } from "@thirdweb-dev/react";
+import { useAddress, useContract, useMetamask, useContractWrite, useContractMetadata, useBalance } from "@thirdweb-dev/react";
 import { ethers } from 'ethers';
 
 const StateContext = createContext();
@@ -9,6 +9,7 @@ export const StateContextProvider = ({ children }) => {
     const { contract } = useContract('0xc1847E7573c689215e40230749ab1c7728073E22');
     const address = useAddress();
     const connect = useMetamask();
+    const balance = useBalance();
     const { mutateAsync: createCampaign } = useContractWrite(contract, "createCampaign");
     const { data: contractMetadata, isLoading } = useContractMetadata(contract);
 
@@ -48,29 +49,6 @@ export const StateContextProvider = ({ children }) => {
         return parsedCampaings;
     }
 
-    const getCampaignsByPostId = async (_postId) => {
-        // const allCampaigns = await getCampaigns();
-
-        // const filteredCampaigns = allCampaigns.filter((campaign) => campaign.postId === _postId);
-
-        // return filteredCampaigns[0];
-//-----------------------------------------------------------------------------------------------------------------------------
-        // const campaign = await contract.Read('getCampaignsByPostId', _postId);
-        // console.log(campaign);
-        // const parsedCampaings = campaigns.map((campaign, i) => ({
-        //     postId: campaign.postId,
-        //     owner: campaign.owner,
-        //     title: campaign.title,
-        //     description: campaign.description,
-        //     target: ethers.utils.formatEther(campaign.target.toString()),
-        //     deadline: campaign.deadline.toNumber(),
-        //     amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
-        //     image: campaign.image,
-        //     pId: i
-        // }));
-        // return parsedCampaings;
-    }
-
     const getUserCampaigns = async () => {
         const allCampaigns = await getCampaigns();
 
@@ -103,6 +81,7 @@ export const StateContextProvider = ({ children }) => {
         <StateContext.Provider
             value={{
                 address,
+                balance,
                 contract,
                 connect,
                 createCampaign: publishCampaign,
@@ -110,7 +89,6 @@ export const StateContextProvider = ({ children }) => {
                 getUserCampaigns,
                 donate,
                 getDonations,
-                getCampaignsByPostId
             }}
         >
             {children}
