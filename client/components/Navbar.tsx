@@ -45,6 +45,9 @@ function Navbar() {
                     <div className='flex-row justify-center items-center hidden sm:flex'>
                         <ConnectWallet accentColor={"#8c6dfd"} />
                     </div>
+                    <div className={`w-[52px] h-[52px]`}>
+                        
+                    </div>
                 </div>
             </div>
 
@@ -77,11 +80,6 @@ function Navbar() {
                                     <li onClick={() => setToggleDrawer(!toggleDrawer)}>
                                         <Link href={"/Start"}>
                                             <SidebarTile Icon={MdFlag} title={"Start"} page={activePage} />
-                                        </Link>
-                                    </li>
-                                    <li onClick={() => setToggleDrawer(!toggleDrawer)}>
-                                        <Link href={"/Explore"}>
-                                            <SidebarTile Icon={MdExplore} title={"Explore"} page={activePage} />
                                         </Link>
                                     </li>
                                     <li onClick={() => setToggleDrawer(!toggleDrawer)}>

@@ -43,9 +43,6 @@ function Sidebar() {
                         <Link href={"/Start"}>
                             <SidebarTile Icon={MdFlag} title={"Start"} page={activePage} />
                         </Link>
-                        <Link href={"/Explore"}>
-                            <SidebarTile Icon={MdExplore} title={"Explore"} page={activePage} />
-                        </Link>
                         <Link href={"/Community"}>
                             <SidebarTile Icon={MdGroups} title={"Community"} page={activePage} />
                         </Link>
