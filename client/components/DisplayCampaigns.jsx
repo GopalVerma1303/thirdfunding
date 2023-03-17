@@ -31,7 +31,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
                 )}
 
                 {!isLoading && campaigns.length > 0 && campaigns.map((campaign) =>
-                    <Link href={{ pathname: 'CampaignDetails', query: { state: JSON.stringify(campaign) } }}
+                    <Link href={{ pathname: `CampaignDetails/${campaign.postId}` }}
                     >
                         <FundCard
                             key={campaign.id}

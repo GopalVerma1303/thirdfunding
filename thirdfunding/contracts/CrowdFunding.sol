@@ -3,6 +3,7 @@ pragma solidity ^0.8.9;
 
 contract CrowdFunding {
     struct Campaign {
+        bytes32 postId;
         address owner;
         string title;
         string description;
@@ -29,12 +30,14 @@ contract CrowdFunding {
         string memory _image
     ) public returns (uint256) {
         Campaign storage campaign = campaigns[numberOfCampaigns];
-
         require(
             campaign.deadline < block.timestamp,
             "The deadline should be a date in the future."
         );
 
+        campaign.postId = keccak256(
+            abi.encodePacked(_description, block.timestamp, msg.sender)
+        );
         campaign.owner = _owner;
         campaign.title = _title;
         campaign.description = _description;
@@ -105,5 +108,19 @@ contract CrowdFunding {
         }
 
         return allCampaignsByCategory;
+    }
+
+    function getCampaignsByPostId(bytes32 _postId)
+        public
+        view
+        returns (Campaign memory)
+    {
+        for (uint256 i = 0; i < numberOfCampaigns; i++) {
+            if (campaigns[i].postId == _postId) {
+                return campaigns[i];
+            }
+        }
+
+        return campaigns[0];
     }
 }

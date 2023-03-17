@@ -1,57 +1,100 @@
 import React, { useState, useEffect } from 'react'
 import { ethers } from 'ethers';
 import { useRouter } from 'next/router'
-import { useStateContext } from '../context';
-import CountBox from '../components/CountBox';
-import CustomButton from '../components/CustomButton';
-import Loader from '../components/Loader';
-import { calculateBarPercentage, daysLeft } from '../utils';
-import { thirdweb } from '../assets';
+import { useStateContext } from '../../context';
+import CountBox from '../../components/CountBox';
+import CustomButton from '../../components/CustomButton';
+import Loader from '../../components/Loader';
+import { calculateBarPercentage, daysLeft } from '../../utils';
+import { thirdweb } from '../../assets';
+import { useContract } from "@thirdweb-dev/react";
+import Web3 from 'web3';
 
 function CampaignDetails() {
     const router = useRouter()
-    const { state } = router.query
-    const data = state ? JSON.parse(state) : null
-    const { donate, getDonations, contract, address } = useStateContext();
+    const { PostId } = router.query
+    // const data = PostId ? JSON.parse(PostId) : null
+
+    const { donate, getDonations, address, getCampaignsByPostId, contract } = useStateContext();
+    const [campaign, setCampaign] = useState({})
+    // const { contract } = useContract('0xc1847E7573c689215e40230749ab1c7728073E22');
+    const [fetchedContract, setFetchedContract] = useState();
+
+    const [target, setTarget] = useState();
+    const [amountCollected, setAmountCollected] = useState();
+    const [deadline, setDeadline] = useState();
+
     const [isLoading, setIsLoading] = useState(false);
     const [amount, setAmount] = useState('');
     const [donators, setDonators] = useState([]);
 
-    const remainingDays = daysLeft(data.deadline);
+    const remainingDays = daysLeft(deadline);
 
-    // const fetchDonators = async () => {
-    //     const data = await getDonations(state.pId);
-    //     setDonators(data);
-    // }
+    const fetchDonators = async () => {
+        const data = await getDonations(contract.pId);
+        setDonators(data);
+    }
 
     // useEffect(() => {
     //     if (contract) fetchDonators();
     // }, [contract, address])
 
+
     const handleDonate = async () => {
         setIsLoading(true);
-        await donate(state.pId, amount);
+        await donate(contract.pId, amount);
         navigate('/')
         setIsLoading(false);
     }
+
+    // const fetchContract = () => {
+    //     setFetchedContract(contract);
+    // }
+
+    // useEffect(() => {
+    //     fetchContract(PostId);
+    // }, [])
+
+    const fetchCampaignByPostId = async (postId) => {
+        const campaign = await contract.call('getCampaignsByPostId', postId);
+        setCampaign(campaign);
+        console.log(campaign);
+        const t = Web3.utils.toBN(campaign.target._hex);
+        const a = Web3.utils.toBN(campaign.amountCollected._hex);
+        const d = Web3.utils.toBN(campaign.deadline._hex);
+        setTarget(parseInt(t.toString()))
+        setAmountCollected(parseInt(a.toString()))
+        setDeadline(parseInt(d.toString()))
+    }
+
+    useEffect(() => {
+        if (contract) {
+            fetchCampaignByPostId(PostId);
+        }
+    }, [contract])
+
 
     return (
         <div>
             {isLoading && <Loader />}
 
+            <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{campaign.title}</h1>
+
             <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
+
                 <div className="flex-1 flex-col">
-                    <img src={data.image} alt="campaign" className="w-full h-[410px] object-cover rounded-xl" />
+                    <img src={campaign.image} alt="campaign" className="w-full h-[410px] object-cover rounded-xl" />
                     <div className="relative w-full h-[5px] bg-[#3a3a43] mt-2">
-                        <div className="absolute h-full bg-[#4acd8d]" style={{ width: `${calculateBarPercentage(data.target, data.amountCollected)}%`, maxWidth: '100%' }}>
+                        <div className="absolute h-full bg-[#4acd8d]" style={{ width: `${calculateBarPercentage(target, amountCollected)}%`, maxWidth: '100%' }}>
                         </div>
                     </div>
                 </div>
 
                 <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
                     <CountBox title="Days Left" value={remainingDays} />
-                    <CountBox title={`Raised of ${data.target}`} value={data.amountCollected} />
-                    <CountBox title="Total Backers" value={donators.length} />
+                    <CountBox title={`Raised of ${target / 1000000000000000000} ETH`} value={amountCollected} />
+                    {/* <CountBox title="Total Backers" value={donators.length} /> */}
+                    <CountBox title="Total Backers" value={10} />
                 </div>
             </div>
 
@@ -61,11 +104,11 @@ function CampaignDetails() {
                         <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Creator</h4>
 
                         <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
-                            <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
+                            {/* <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
                                 <img src={thirdweb} alt="user" className="w-[60%] h-[60%] object-contain" />
-                            </div>
+                            </div> */}
                             <div>
-                                <h4 className="font-epilogue font-semibold text-[14px] text-white break-all">{state.owner}</h4>
+                                <h4 className="font-epilogue font-semibold text-[14px] text-white break-all">{campaign.owner}</h4>
                                 <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">10 Campaigns</p>
                             </div>
                         </div>
@@ -75,7 +118,7 @@ function CampaignDetails() {
                         <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Story</h4>
 
                         <div className="mt-[20px]">
-                            <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{data.description}</p>
+                            <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{campaign.description}</p>
                         </div>
                     </div>
 
@@ -128,17 +171,22 @@ function CampaignDetails() {
                 </div>
             </div>
         </div>
-        // <>
-        //     <div className='text-white'>{data.amountCollected}</div>
-        //     <div className='text-white'>{data.campaignCode}</div>
-        //     <div className='text-white'>{data.deadline}</div>
-        //     <div className='text-white'>{data.description}</div>
-        //     <div className='text-white'>{data.image}</div>
-        //     <div className='text-white'>{data.owner}</div>
-        //     <div className='text-white'>{data.pId}</div>
-        //     <div className='text-white'>{data.target}</div>
-        //     <div className='text-white'>{data.title}</div>
-        // </>
+
+        // {/* <>
+        //     <div className='text-white'>{amountCollected}</div>
+        //     <div className='text-white'>{deadline}</div>
+        //     <div className='text-white'>{campaign.description}</div>
+        //     <div className='text-white'>{campaign.image}</div>
+        //     <div className='text-white'>{campaign.owner}</div>
+        //     <div className='text-white'>{campaign.postId}</div>
+        //     <div className='text-white'>{target}</div>
+        //     <div className='text-white'>{campaign.title}</div>
+        //     <div className='text-white'>{remainingDays}</div>
+        // </> */}
+
+        // <div className='text-white'>
+        //     {PostId}
+        // </div>
     )
 }
 

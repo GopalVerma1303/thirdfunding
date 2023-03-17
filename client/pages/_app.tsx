@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import { StateContextProvider } from '../context'
 import { Route, Routes } from 'react-router-dom';
-import CampaignDetails from './CampaignDetails';
+import CampaignDetails from './CampaignDetails/[PostId]';
 
 const activeChainId = ChainId.Mumbai;
 

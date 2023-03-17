@@ -36,7 +36,7 @@ const FundCard = ({ owner, title, description, target, deadline, amountCollected
                 <div className="flex items-center mt-[20px] gap-[12px]">
 
                     <RxCube className='text-[#808191]' />
-                    <p className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">by <span className="text-[#b2b3bd]">{owner}</span></p>
+                    <p className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] break-all">by <span className="text-[#b2b3bd]">{owner}</span></p>
                 </div>
             </div>
         </div>

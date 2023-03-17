@@ -4,7 +4,7 @@ import { MdHomeFilled } from "react-icons/md";
 import { MdFlag } from "react-icons/md";
 import { MdExplore } from "react-icons/md";
 import { MdGroups } from "react-icons/md";
-import { MdLibraryBooks } from "react-icons/md";
+import { MdNewspaper } from "react-icons/md";
 import { MdPerson } from "react-icons/md";
 import { MdAccountBalanceWallet } from "react-icons/md";
 import { MdOutlineHandyman } from "react-icons/md";
@@ -49,8 +49,8 @@ function Sidebar() {
                         <Link href={"/Community"}>
                             <SidebarTile Icon={MdGroups} title={"Community"} page={activePage} />
                         </Link>
-                        <Link href={"/Blog"}>
-                            <SidebarTile Icon={MdLibraryBooks} title={"Blog"} page={activePage} />
+                        <Link href={"/News"}>
+                            <SidebarTile Icon={MdNewspaper} title={"News"} page={activePage} />
                         </Link>
                         <Link href={"/Profile"}>
                             <SidebarTile Icon={MdPerson} title={"Profile"} page={activePage} />
