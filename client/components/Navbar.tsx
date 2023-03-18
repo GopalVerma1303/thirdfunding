@@ -39,7 +39,7 @@ function Navbar() {
     const [toggleDrawer, setToggleDrawer] = useState(false)
     return (
         <>
-            <div className=' flex space-x-3'>
+            <div className='flex space-x-3'>
                 <Searchbar />
                 <div className=' sm:flex-row flex-col-reverse justify-end align-middle item-centert mb-[35px] flex'>
                     <div className='flex-row justify-center items-center hidden sm:flex'>
@@ -51,9 +51,9 @@ function Navbar() {
                 </div>
             </div>
 
-            <div className='sm:hidden absolute top-0 left-0 w-screen mb-[35px] py-5 pl-4 pr-2 h-[70px] bg-[#1c1c24] justify-start items-center flex'>
+            <div className='sm:hidden absolute z-50 top-0 left-0 w-screen mb-[35px] py-5 pl-4 pr-2 h-[70px] bg-[#1c1c24] justify-start items-center flex'>
                 <div className='w-screen items-center flex justify-between'>
-                    <div className='-mr-3 rounded-xl bg-[#2e2f35] flex item-center cursor-pointer justify-center items-center w-[52px] h-[52px]'>
+                    <div onClick={() => setToggleDrawer(!toggleDrawer)} className='-mr-3 rounded-xl bg-[#2e2f35] flex item-center cursor-pointer justify-center items-center w-[52px] h-[52px]'>
                         <Link href="/">
                             <img src='/thirdfundinglogo.png' className='w-[52px] h-[52px] rounded-xl' />
                         </Link>
