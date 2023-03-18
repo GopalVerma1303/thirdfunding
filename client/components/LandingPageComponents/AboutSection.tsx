@@ -20,6 +20,24 @@ function AboutSection() {
                 src='/thirdfundinglogo.png'
                 className='-mt-32 sm:mt-24 md:mb-0 flex-shrink-0 w-56 h-56 rounded-xl sm:rounded-[100px] object-cover md:w-64 md:h-95 xl:w-[500px] xl:h-[500px]'
             /> */}
+            <div className='space-y-10 px-0 md:px-10'>
+                <h4 className='text-4xl font-semibold text-white'>
+                    Here is a{" "}
+                    <span className='underline decoration-[#8C6DFD]'>little</span>{" "}
+                    background
+                </h4>
+                <p className='text-white text-base'>
+                    uibwnpidunpwcubniu
+                    uibwnpidunpwcubniu
+                    uibwnpidunpwcubniu
+                    uibwnpidunpwcubniu
+                    uibwnpidunpwcubniu
+                    uibwnpidunpwcubniu
+                    uibwnpidunpwcubniu
+                    uibwnpidunpwcubniu
+               
+                </p>
+            </div>
         </div>
     )
 }

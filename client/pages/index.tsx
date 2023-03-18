@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <title>Thirdfunding</title>
       </head> */}
       {/* ---------------------------------------- */}
-      
+
       {/* <Header /> */}
       <section id='hero' className='snap-start'>
         <HeroSection />
