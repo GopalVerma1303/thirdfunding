@@ -39,14 +39,14 @@ function Navbar() {
     const [toggleDrawer, setToggleDrawer] = useState(false)
     return (
         <>
-            <div className=' flex space-x-3 '>
+            <div className=' flex space-x-3'>
                 <Searchbar />
                 <div className=' sm:flex-row flex-col-reverse justify-end align-middle item-centert mb-[35px] flex'>
                     <div className='flex-row justify-center items-center hidden sm:flex'>
                         <ConnectWallet accentColor={"#8c6dfd"} />
                     </div>
-                    <div className={`w-[52px] h-[52px]`}>
-                        
+                    <div className={`w-[52px] h-[52px] sm:hidden`}>
+
                     </div>
                 </div>
             </div>
