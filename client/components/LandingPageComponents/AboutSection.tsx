@@ -3,39 +3,21 @@ import React from 'react'
 
 function AboutSection() {
     return (
-        <div className='flex flex-col relative h-screen text-center md:text-left md:flex-row px-10 justify-evenly mx-auto items-center'>
-            <h3 className=' absolute top-24 uppercase tracking-[20px] text-gray-500 text-[15px] sm:text-[20px]'>
-                About
-            </h3>
-            {/* <motion.img
-                initial={{
-                    x: -200,
-                    opacity: 0,
-                }}
-                transition={{
-                    duration: 1.2
-                }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                src='/thirdfundinglogo.png'
-                className='-mt-32 sm:mt-24 md:mb-0 flex-shrink-0 w-56 h-56 rounded-xl sm:rounded-[100px] object-cover md:w-64 md:h-95 xl:w-[500px] xl:h-[500px]'
-            /> */}
-            <div className='space-y-10 px-0 md:px-10'>
+        <div className='flex flex-col relative h-screen text-center md:text-left  px-10 justify-evenly mx-auto items-center'>
+            <div>
+                <h3 className=' top-24 uppercase tracking-[20px] text-gray-500 text-[15px] sm:text-[20px]'>
+                    About
+                </h3>
+            </div>
+            <div className=' text-center flex-col md:flex-row space-y-10 px-0 md:px-10 w-[300px] md:w-[600px] xl:w-[900px]'>
                 <h4 className='text-4xl font-semibold text-white'>
                     Here is a{" "}
                     <span className='underline decoration-[#8C6DFD]'>little</span>{" "}
                     background
                 </h4>
-                <p className='text-white text-base'>
-                    uibwnpidunpwcubniu
-                    uibwnpidunpwcubniu
-                    uibwnpidunpwcubniu
-                    uibwnpidunpwcubniu
-                    uibwnpidunpwcubniu
-                    uibwnpidunpwcubniu
-                    uibwnpidunpwcubniu
-                    uibwnpidunpwcubniu
-               
+                <p className='text-white text-base text-center'>
+                    Welcome to our decentralized crowdfunding platform! Our platform is designed to provide a secure and transparent way to create and support campaigns that matter to you.
+                    At our decentralized crowdfunding platform, we're committed to providing a secure and transparent way to create and support campaigns that matter to you. We believe that everyone has the power to make a difference, and we're here to help you do just that. Join us today and start making a positive impact in your community!
                 </p>
             </div>
         </div>

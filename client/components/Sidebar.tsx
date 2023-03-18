@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import SidebarTile from './SidebarTile'
-import { MdHomeFilled } from "react-icons/md";
+import { MdExplore, MdHomeFilled } from "react-icons/md";
 import { MdFlag } from "react-icons/md";
-import { MdExplore } from "react-icons/md";
+// import { MdExplore } from "react-icons/md";
 import { MdGroups } from "react-icons/md";
 import { MdNewspaper } from "react-icons/md";
 import { MdPerson } from "react-icons/md";
-import { MdAccountBalanceWallet } from "react-icons/md";
-import { MdOutlineHandyman } from "react-icons/md";
+// import { MdAccountBalanceWallet } from "react-icons/md";
+// import { MdOutlineHandyman } from "react-icons/md";
 import { MdInfo } from "react-icons/md";
-import { MdAccountBalance } from "react-icons/md";
+// import { MdAccountBalance } from "react-icons/md";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MdWbSunny } from "react-icons/md";
@@ -37,8 +37,8 @@ function Sidebar() {
                 </div>
                 <div className=' flex-1 flex flex-col justify-between items-center bg-[#1c1c24 rounded-[20px] w-[76px] py-4 '>
                     <div className='flex flex-col space-y-3 justify-between'>
-                        <Link href={"/Home"}>
-                            <SidebarTile Icon={MdHomeFilled} title={"Home"} page={activePage} />
+                        <Link href={"/Explore"}>
+                            <SidebarTile Icon={MdExplore} title={"Explore"} page={activePage} />
                         </Link>
                         <Link href={"/Start"}>
                             <SidebarTile Icon={MdFlag} title={"Start"} page={activePage} />

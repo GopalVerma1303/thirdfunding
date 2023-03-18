@@ -5,6 +5,7 @@ import AboutSection from '../components/LandingPageComponents/AboutSection'
 import BackgroundCircles from '../components/LandingPageComponents/BackgroundCircles'
 import Header from '../components/LandingPageComponents/Header'
 import HeroSection from '../components/LandingPageComponents/HeroSection'
+import FeaturesSection from '../components/LandingPageComponents/FeaturesSection'
 
 const Home: NextPage = () => {
   return (
@@ -19,11 +20,14 @@ const Home: NextPage = () => {
       {/* ---------------------------------------- */}
 
       {/* <Header /> */}
-      <section id='hero' className='snap-start'>
+      <section id='hero' className='snap-center'>
         <HeroSection />
       </section>
       <section id='about' className='snap-center'>
         <AboutSection />
+      </section>
+      <section id='features' className='snap-center'>
+        <FeaturesSection />
       </section>
 
       {/* // Features  */}

@@ -3,7 +3,7 @@ import React from 'react'
 
 function BackgroundCircles() {
     return (
-        <motion.div className='relative flex justify-center items-center -mt-10 sm:mt-0'
+        <motion.div className='relative flex justify-center items-center -mt-40 sm:mt-0'
             initial={{
                 opacity: 0
             }}

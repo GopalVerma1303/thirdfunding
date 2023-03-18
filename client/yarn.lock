@@ -1180,6 +1180,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/css-modules@^1.0.2":
+  "integrity" "sha512-tyqlt2GtEBdsxJylh78zSxI/kOJK5Iz8Ta4Fxr8KLTP8mD/IgMa84D8EKPS/AWCp+MDoctgJyikrVWY28GKmcg=="
+  "resolved" "https://registry.npmjs.org/@types/css-modules/-/css-modules-1.0.2.tgz"
+  "version" "1.0.2"
+
 "@types/http-cache-semantics@*":
   "integrity" "sha512-SZs7ekbP8CN0txVG2xVRH6EgKmEm31BOxA07vkFaETzZz1xh+cbt8BcI0slpymvwhx5dlFnQG2rTlPVQn+iRPQ=="
   "resolved" "https://registry.npmjs.org/@types/http-cache-semantics/-/http-cache-semantics-4.0.1.tgz"

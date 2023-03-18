@@ -24,6 +24,7 @@
     "web3": "^1.8.2"
   },
   "devDependencies": {
+    "@types/css-modules": "^1.0.2",
     "@types/node": "18.13.0",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.6",
