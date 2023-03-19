@@ -18,7 +18,7 @@ function AboutSection() {
                         <span className='underline decoration-[#8C6DFD]'>little</span>{" "}
                         background
                     </h4>
-                    <p className='text-white text-[12px] sm:text-base text-center'>
+                    <p className='text-white text-[12px] w-[600px] sm:text-base text-center'>
                         ThirdFunding is a decentralized crowdfunding platform that operates on blockchain technology. It provides a platform for individuals and organizations to raise funds for their projects without the need for intermediaries like banks or financial institutions. This platform is built on the Ethereum blockchain and uses smart contracts to manage the funding process, ensuring transparency and security.
                     </p>
                 </div>

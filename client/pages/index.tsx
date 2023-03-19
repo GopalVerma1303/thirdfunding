@@ -12,16 +12,6 @@ import Contacts from '../components/LandingPageComponents/Contacts'
 const Home: NextPage = () => {
   return (
     <div className='snap-y snap-mandatory z-0'>
-      {/* // header */}
-
-      {/* causing hydration error */}
-      {/* ---------------------------------------- */}
-      {/* <head>
-        <title>Thirdfunding</title>
-      </head> */}
-      {/* ---------------------------------------- */}
-
-      {/* <Header /> */}
       <section id='hero' className='snap-center'>
         <HeroSection />
       </section>
@@ -37,9 +27,7 @@ const Home: NextPage = () => {
       <section id='contacts' className='snap-center'>
         <Contacts />
       </section>
-      {/* // contact */}
     </div>
-
   )
 }
 
