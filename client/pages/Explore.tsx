@@ -5,12 +5,11 @@ import DisplayCampaigns from '../components/DisplayCampaigns'
 
 function Explore() {
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [campaigns, setCampaigns] = useState([]);
     const { address, contract, getCampaigns } = useStateContext();
 
     const fetchCampaigns = async () => {
-        setIsLoading(true);
         const data = await getCampaigns();
         setCampaigns(data);
         setIsLoading(false);

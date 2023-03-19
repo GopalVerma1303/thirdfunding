@@ -1,9 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { SpinnerCircular } from 'spinners-react';
 import FundCard from './FundCard';
-import { loader } from '../assets';
-import { loading } from '../assets/loading.gif';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -36,7 +33,9 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
             <div className="flex flex-wrap mt-[20px] gap-[26px]">
 
                 {isLoading && (
-                    <SpinnerCircular enabled={true} className="text-[#4acd8d]" />
+                    <div className='absolute left-0 top-0 w-full flex justify-center items-center h-screen'>
+                        <SpinnerCircular enabled={true} className="text-[#4acd8d] " />
+                    </div>
                 )}
 
                 {!isLoading && campaigns.length === 0 && (
