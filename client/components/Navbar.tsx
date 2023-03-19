@@ -30,16 +30,12 @@ function Navbar() {
 
     useEffect(() => {
         setActivePage(router.pathname.slice(1))
-        // if (router.pathname.slice() == '/') {
-        //     router.push('/Home')
-        //     setActivePage('Home')
-        // }
     }, [router.pathname])
 
     const [toggleDrawer, setToggleDrawer] = useState(false)
     return (
         <>
-            <div className='flex space-x-3 '>
+            <div className='flex space-x-3'>
                 <Searchbar />
                 <div className=' sm:flex-row flex-col-reverse justify-end align-middle item-centert mb-[35px] flex'>
                     <div className='flex-row justify-center items-center hidden sm:flex'>

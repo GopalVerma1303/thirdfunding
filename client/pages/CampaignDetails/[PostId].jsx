@@ -78,7 +78,7 @@ function CampaignDetails() {
                 </>) :
                     (
                         <>
-                            <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{campaign.title}</h1>
+                            <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{campaign.title} <span className='text-[#575863]'>{'('}{campaign.category}{')'}</span></h1>
 
                             <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
 

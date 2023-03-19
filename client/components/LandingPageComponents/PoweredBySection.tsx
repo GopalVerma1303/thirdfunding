@@ -21,8 +21,8 @@ function PoweredBySection() {
                 <a href='https://www.coinbase.com/'>
                     <Image className='rounded-full' src="/coinbaselogo.png" width={100} height={100} alt={'Thirdfunding'} />
                 </a>
-                <a href='https://firebase.google.com/'>
-                    <Image className='rounded-full' src="/firebaselogo.png" width={100} height={100} alt={'Thirdfunding'} />
+                <a href='https://gun.eco/'>
+                    <Image className=' invert ' src="/gunjslogo.png" width={100} height={100} alt={'Thirdfunding'} />
                 </a>
                 <a href='https://mediastack.com/'>
                     <Image className='rounded-full' src="/mediastacklogo.png" width={100} height={100} alt={'Thirdfunding'} />
