@@ -13,8 +13,10 @@ function HeroSection() {
         delaySpeed: 2000,
     });
     return (
-        <div className=' -mt-40 sm:-mt-24 h-screen flex flex-col items-center justify-center text-center overflow-hidden'>
+        <div className='-mt-24 sh:m-0 h-screen flex flex-col items-center justify-center text-center overflow-hidden'>
             <div className='z-20'>
+                <BackgroundCircles />
+                <img src='/thirdfundinglogo_bg_removed.png' className='relative h-[100px] w-[100px] mx-auto object-cover' />
                 <h2 className=' text-[12px] sm:text-sm uppercase text-gray-500 sm:pb-10 pb-5 tracking-[15px]'>
                     Welcome to
                 </h2>
@@ -29,15 +31,15 @@ function HeroSection() {
                     <Link href="#features">
                         <button className='heroButton'>Features</button>
                     </Link>
-                    <Link href="#testimonials">
-                        <button className='heroButton'>tech</button>
+                    <Link href="#poweredby">
+                        <button className='heroButton'>Powered by</button>
                     </Link>
-                    <Link href="#contact">
+                    <Link href="#contacts">
                         <button className='heroButton'>Contact us</button>
                     </Link>
                 </div>
             </div>
-            <BackgroundCircles />
+
         </div>
     )
 }

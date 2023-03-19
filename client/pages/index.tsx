@@ -6,6 +6,8 @@ import BackgroundCircles from '../components/LandingPageComponents/BackgroundCir
 import Header from '../components/LandingPageComponents/Header'
 import HeroSection from '../components/LandingPageComponents/HeroSection'
 import FeaturesSection from '../components/LandingPageComponents/FeaturesSection'
+import PoweredBySection from '../components/LandingPageComponents/PoweredBySection'
+import Contacts from '../components/LandingPageComponents/Contacts'
 
 const Home: NextPage = () => {
   return (
@@ -29,11 +31,13 @@ const Home: NextPage = () => {
       <section id='features' className='snap-center'>
         <FeaturesSection />
       </section>
-
-      {/* // Features  */}
-      {/* // Testimonials or Social Proof */}
-      {/* // Call-to-Action */}
-      {/* // Footer */}
+      <section id='poweredby' className='snap-center'>
+        <PoweredBySection />
+      </section>
+      <section id='contacts' className='snap-center'>
+        <Contacts />
+      </section>
+      {/* // contact */}
     </div>
 
   )

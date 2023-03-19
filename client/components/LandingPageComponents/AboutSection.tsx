@@ -9,17 +9,45 @@ function AboutSection() {
                     About
                 </h3>
             </div>
-            <div className=' text-center flex-col md:flex-row space-y-10 px-0 md:px-10 w-[300px] md:w-[600px] xl:w-[900px]'>
-                <h4 className='text-4xl font-semibold text-white'>
-                    Here is a{" "}
-                    <span className='underline decoration-[#8C6DFD]'>little</span>{" "}
-                    background
-                </h4>
-                <p className='text-white text-base text-center'>
-                    Welcome to our decentralized crowdfunding platform! Our platform is designed to provide a secure and transparent way to create and support campaigns that matter to you.
-                    At our decentralized crowdfunding platform, we're committed to providing a secure and transparent way to create and support campaigns that matter to you. We believe that everyone has the power to make a difference, and we're here to help you do just that. Join us today and start making a positive impact in your community!
-                </p>
+            <div className=' w-[300px] md:w-[600px] xl:w-[900px] flex space-x-5 overflow-x-scroll p-10 snap-x snap-mandatory'>
+                {/* background */}
+                <div className=' flex flex-col rounded-l items-center space-y-7 flex-shrink-0 w-[300px] md:w-[600px] xl:w-[900px] snap-center 
+         hover:opacity-100 opacity-100 cursor-pointer transition-opacity duration-200 overflow-hidden'>
+                    <h4 className='text-4xl font-semibold text-white'>
+                        Here is a{" "}
+                        <span className='underline decoration-[#8C6DFD]'>little</span>{" "}
+                        background
+                    </h4>
+                    <p className='text-white text-[12px] sm:text-base text-center'>
+                        ThirdFunding is a decentralized crowdfunding platform that operates on blockchain technology. It provides a platform for individuals and organizations to raise funds for their projects without the need for intermediaries like banks or financial institutions. This platform is built on the Ethereum blockchain and uses smart contracts to manage the funding process, ensuring transparency and security.
+                    </p>
+                </div>
+                {/* problem solved */}
+                <div className=' flex flex-col rounded-l items-center space-y-7 flex-shrink-0 w-[300px] md:w-[600px] xl:w-[900px] snap-center 
+         hover:opacity-100 opacity-100 cursor-pointer transition-opacity duration-200 overflow-hidden'>
+                    <h4 className='text-4xl font-semibold text-white'>
+                        Here are the {" "}
+                        <span className='underline decoration-[#8C6DFD]'>problems</span>{" "}
+                        it solves
+                    </h4>
+                    <p className='text-white text-[12px] sm:text-base text-center'>
+                        Lowering barriers to entry by allowing anyone to participate in crowdfunding campaigns, regardless of their location or financial status.
+                        Reducing reliance on intermediaries, such as banks or financial institutions, which can add costs and delays to the crowdfunding process.
+                        Providing greater transparency and security through the use of blockchain technology and smart contracts.                    </p>
+                </div>
+                {/* utility */}
+                <div className=' flex flex-col rounded-l items-center space-y-7 flex-shrink-0 w-[300px] md:w-[600px] xl:w-[900px] snap-center 
+         hover:opacity-100 opacity-100 cursor-pointer transition-opacity duration-200 overflow-hidden'>
+                    <h4 className='text-4xl font-semibold text-white'>
+                        Here is{" "}
+                        <span className='underline decoration-[#8C6DFD]'>how</span>{" "}
+                        it's useful
+                    </h4>
+                    <p className='text-white text-[12px] sm:text-base text-center'>
+                        Decentralized crowdfunding apps can be used for a variety of purposes, including fundraising for non-profits, supporting creative projects, and launching new startups. They can provide a more democratic and transparent way for individuals and organizations to raise funds, while also reducing transaction costs and increasing security. Additionally, decentralized crowdfunding platforms can help to democratize investment opportunities by allowing anyone to invest in early-stage startups and gain access to potential high returns.                    </p>
+                </div>
             </div>
+
         </div>
     )
 }

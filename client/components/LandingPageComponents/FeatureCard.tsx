@@ -29,7 +29,7 @@ function FeatureCard({ Icon, title, description }: Props) {
             </motion.div> */}
             <div className='px-0 md:px-10 text-white'>
                 <h4 className='flex items-center gap-2 text-4xl font-semibold py-5 text-[#4ACD8D]'><Icon className='text-[#4ACD8D] text-[40px]' /> {title}</h4>
-                <p className='text-base mt-1 text-start'>{description}</p>
+                <p className='text-[12px] sm:text-base mt-1 text-start'>{description}</p>
             </div>
         </article>
     )

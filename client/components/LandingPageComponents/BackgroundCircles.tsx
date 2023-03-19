@@ -3,7 +3,7 @@ import React from 'react'
 
 function BackgroundCircles() {
     return (
-        <motion.div className='relative flex justify-center items-center -mt-40 sm:mt-0'
+        <motion.div className=' -z-10 relative flex justify-center items-center'
             initial={{
                 opacity: 0
             }}
@@ -16,10 +16,11 @@ function BackgroundCircles() {
                 duration: 1.5
             }}
         >
-            <div className='absolute border border-[#D30384] rounded-full h-[150px] w-[150px] sm:h-[400px] sm:w-[400px] mt-0 animate-ping' />
-            <div className='rounded-full border border-[#D30384] opacity-20 sm:h-[400px] sm:w-[400px] h-[150px] w-[150px] absolute mt-0' />
-            <div className='rounded-full border border-[#D30384] opacity-20 sm:h-[600px] sm:w-[600px] h-[300px] w-[300px] absolute mt-0' />
-            <div className='rounded-full border border-[#8c6dfd] opacity-20 sm:h-[750px] sm:w-[750px] absolute mt-0' />
+            <div className='absolute border border-[#D30384] rounded-full h-[200px] w-[200px]  animate-ping mt-52' />
+            <div className='rounded-full border border-[#D30384] opacity-20  h-[300px] w-[300px] absolute mt-52' />
+            <div className='rounded-full border border-[#D30384] opacity-20  h-[500px] w-[500px] absolute mt-52' />
+            <div className='rounded-full border border-[#8c6dfd] opacity-20 h-[650px] w-[650px] absolute mt-52' />
+            <div className='rounded-full border border-[#8c6dfd] opacity-20 h-[800px] w-[800px] absolute mt-52' />
             <div />
         </motion.div>
     )
