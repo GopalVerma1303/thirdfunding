@@ -14,6 +14,22 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
         router.push('CampaignDetails')
     }
 
+    const campaignCards = [];
+    if (!isLoading && campaigns.length > 0) {
+        for (let i = 0; i < campaigns.length; i++) {
+            const campaign = campaigns[i];
+            campaignCards.push(
+                <Link href={{ pathname: `CampaignDetails/${i}` }}>
+                    <FundCard
+                        key={campaign.id}
+                        {...campaign}
+                        handleClick={() => handleNavigate(campaign)}
+                    />
+                </Link>
+            );
+        }
+    }
+
     return (
         <div>
             <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{title} ({campaigns.length})</h1>
@@ -29,7 +45,11 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
                     </p>
                 )}
 
-                {!isLoading && campaigns.length > 0 && campaigns.map((campaign) =>
+                {campaignCards}
+                {isLoading && <p>Loading campaigns...</p>}
+                {campaigns.length === 0 && <p>No campaigns found.</p>}
+
+                {/* {!isLoading && campaigns.length > 0 && campaigns.map((campaign) =>
                     <Link href={{ pathname: `CampaignDetails/${campaign.postId}` }}
                     >
                         <FundCard
@@ -38,7 +58,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
                             handleClick={() => handleNavigate(campaign)}
                         />
                     </Link>
-                )}
+                )} */}
 
             </div>
         </div>

@@ -6,7 +6,7 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
 
-    const { contract } = useContract('0xc1847E7573c689215e40230749ab1c7728073E22');
+    const { contract } = useContract('0xc84FB9c7531d62DFF395562D6f6a8FA57015152f');
     const address = useAddress();
     const connect = useMetamask();
     const balance = useBalance();

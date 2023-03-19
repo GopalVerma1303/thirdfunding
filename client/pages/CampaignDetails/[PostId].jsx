@@ -31,32 +31,24 @@ function CampaignDetails() {
     const remainingDays = daysLeft(deadline);
 
     const fetchDonators = async () => {
-        const data = await getDonations(contract.pId);
+        const data = await getDonations(PostId);
         setDonators(data);
     }
 
-    // useEffect(() => {
-    //     if (contract) fetchDonators();
-    // }, [contract, address])
+    useEffect(() => {
+        if (contract) fetchDonators();
+    }, [contract, address])
 
 
     const handleDonate = async () => {
         setIsLoading(true);
-        await donate(contract.pId, amount);
-        navigate('/')
+        await donate(PostId, amount);
+        router.push('/Explore')
         setIsLoading(false);
     }
 
-    // const fetchContract = () => {
-    //     setFetchedContract(contract);
-    // }
-
-    // useEffect(() => {
-    //     fetchContract(PostId);
-    // }, [])
-
-    const fetchCampaignByPostId = async (postId) => {
-        const campaign = await contract.call('getCampaignsByPostId', postId);
+    const fetchCampaignById = async (postId) => {
+        const campaign = await contract.call('getCampaignsById', postId);
         setCampaign(campaign);
         console.log(campaign);
         const t = Web3.utils.toBN(campaign.target._hex);
@@ -69,7 +61,7 @@ function CampaignDetails() {
 
     useEffect(() => {
         if (contract) {
-            fetchCampaignByPostId(PostId);
+            fetchCampaignById(PostId);
         }
     }, [contract])
 
@@ -92,7 +84,7 @@ function CampaignDetails() {
 
                 <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
                     <CountBox title="Days Left" value={remainingDays} />
-                    <CountBox title={`Raised of ${target / 1000000000000000000} ETH`} value={amountCollected} />
+                    <CountBox title={`Raised of ${target / 1000000000000000000} ETH`} value={amountCollected / 1000000000000000000} />
                     {/* <CountBox title="Total Backers" value={donators.length} /> */}
                     <CountBox title="Total Backers" value={10} />
                 </div>
@@ -105,7 +97,7 @@ function CampaignDetails() {
 
                         <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
                             <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
-                                <img src="/thirdweb.png" alt="user" className="w-[60%] h-[60%] object-contain" />
+                                <img src="/thirdfundinglogo_bg_removed.png" alt="user" className="w-[80%] h-[80%] object-contain" />
                             </div>
                             <div>
                                 <h4 className="font-epilogue font-semibold text-[14px] text-white break-all">{campaign.owner}</h4>
