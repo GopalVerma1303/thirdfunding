@@ -44,7 +44,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
                     </p>
                 )}
 
-                {/* {campaignCards} */}
+                {campaignCards}
                 {/* {isLoading && <p>Loading campaigns...</p>} */}
                 {/* {campaigns.length === 0 && <p>No campaigns found.</p>} */}
 
