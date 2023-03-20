@@ -44,9 +44,9 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
                     </p>
                 )}
 
-                {campaignCards}
-                {isLoading && <p>Loading campaigns...</p>}
-                {campaigns.length === 0 && <p>No campaigns found.</p>}
+                {/* {campaignCards} */}
+                {/* {isLoading && <p>Loading campaigns...</p>} */}
+                {/* {campaigns.length === 0 && <p>No campaigns found.</p>} */}
 
                 {/* {!isLoading && campaigns.length > 0 && campaigns.map((campaign) =>
                     <Link href={{ pathname: `CampaignDetails/${campaign.postId}` }}
