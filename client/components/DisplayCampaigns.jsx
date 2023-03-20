@@ -43,22 +43,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
                         You have not created any campigns yet
                     </p>
                 )}
-
                 {campaignCards}
-                {/* {isLoading && <p>Loading campaigns...</p>} */}
-                {/* {campaigns.length === 0 && <p>No campaigns found.</p>} */}
-
-                {/* {!isLoading && campaigns.length > 0 && campaigns.map((campaign) =>
-                    <Link href={{ pathname: `CampaignDetails/${campaign.postId}` }}
-                    >
-                        <FundCard
-                            key={campaign.id}
-                            {...campaign}
-                            handleClick={() => handleNavigate(campaign)}
-                        />
-                    </Link>
-                )} */}
-
             </div>
         </div>
     )

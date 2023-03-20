@@ -29,7 +29,7 @@ function AboutSection() {
                         <span className='underline decoration-[#8C6DFD]'>problems</span>{" "}
                         it solves
                     </h4>
-                    <p className='text-white text-[12px] sm:text-base text-center'>
+                    <p className='text-white text-[12px] w-[600px] sm:text-base text-center'>
                         Lowering barriers to entry by allowing anyone to participate in crowdfunding campaigns, regardless of their location or financial status.
                         Reducing reliance on intermediaries, such as banks or financial institutions, which can add costs and delays to the crowdfunding process.
                         Providing greater transparency and security through the use of blockchain technology and smart contracts.                    </p>
@@ -42,7 +42,7 @@ function AboutSection() {
                         <span className='underline decoration-[#8C6DFD]'>how</span>{" "}
                         it's useful
                     </h4>
-                    <p className='text-white text-[12px] sm:text-base text-center'>
+                    <p className='text-white text-[12px] w-[600px] sm:text-base text-center'>
                         Decentralized crowdfunding apps can be used for a variety of purposes, including fundraising for non-profits, supporting creative projects, and launching new startups. They can provide a more democratic and transparent way for individuals and organizations to raise funds, while also reducing transaction costs and increasing security. Additionally, decentralized crowdfunding platforms can help to democratize investment opportunities by allowing anyone to invest in early-stage startups and gain access to potential high returns.                    </p>
                 </div>
             </div>
