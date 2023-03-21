@@ -1,13 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
+import { useStateContext } from '../../miscellaneous_contexts'
 interface Props {
     name: string,
     avatarUrl: string
 }
 
 function ConversationTile({ name, avatarUrl }: Props) {
+    const {chatToggleDrawer, setChatToggleDrawer} = useStateContext();
+    const CommunityMenuToggleDrawer = (value: boolean) => {
+        setChatToggleDrawer(value);
+    }
     return (
-        <div className="bg-[#2D2D39] rounded-lg flex justify-start items-center p-2 gap-2 hover:cursor-pointer">
+        <div onClick={() => CommunityMenuToggleDrawer(!chatToggleDrawer)} className="bg-[#2D2D39] flex justify-start items-center p-2 gap-2 hover:cursor-pointer">
             <div>
                 <img
                     className="rounded-full h-[30px] w-[30px]"
