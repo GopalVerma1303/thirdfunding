@@ -41,8 +41,8 @@ function Navbar() {
                     <div className='flex-row justify-center items-center hidden sm:flex'>
                         <ConnectWallet accentColor={"#8c6dfd"} />
                     </div>
-                    <div className={`w-[52px] h-[52px] sm:hidden`}>
-
+                    <div className={`w-[52px] h-[52px] mx-1 flex item-center transition-all duration-200 hover:bg-[#2e2f35] hover:cursor-pointer rounded-lg justify-center items-center`}>
+                        <MdWbSunny className={`h-6 w-6 text-[#8c6dfd]`} />
                     </div>
                 </div>
             </div>
