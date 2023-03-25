@@ -13,6 +13,16 @@ export const StateContextProvider = ({ children }) => {
     const { mutateAsync: createCampaign } = useContractWrite(contract, "createCampaign");
     const { data: contractMetadata, isLoading } = useContractMetadata(contract);
 
+    const connectToPolygonMumbai = async () => {
+        try {
+            // Will open the MetaMask UI
+            // You should disable this button while the request is pending!
+            await ethereum.request({ method: 'eth_requestAccounts' });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const publishCampaign = async (form) => {
         try {
             const data = await createCampaign([
@@ -83,6 +93,7 @@ export const StateContextProvider = ({ children }) => {
                 address,
                 balance,
                 contract,
+                connectToPolygonMumbai,
                 connect,
                 createCampaign: publishCampaign,
                 getCampaigns,

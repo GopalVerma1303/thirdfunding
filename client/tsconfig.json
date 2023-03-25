@@ -26,7 +26,7 @@
     "context/index.jsx",
     "pages/Start.jsx",
     "pages/CampaignDetails/[PostId].jsx"
-  ],
+, "components/CommunityPageComponents/ChatView.tsx", "components/Modals/AddRoomModal.jsx"  ],
   "exclude": [
     "node_modules"
   ]

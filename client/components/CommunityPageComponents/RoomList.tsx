@@ -1,4 +1,5 @@
 import React from 'react'
+import AddRoomAvatar from './AddRoomAvatar'
 import RoomAvatar from './RoomAvatar'
 
 function RoomList() {
@@ -53,7 +54,7 @@ function RoomList() {
                 <RoomAvatar />
                 <RoomAvatar />
                 <RoomAvatar />
-                <RoomAvatar />
+                <AddRoomAvatar />
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { MdMenu } from "react-icons/md";
 import CustomButton from './CustomButton';
 import { ConnectWallet } from "@thirdweb-dev/react";
@@ -19,13 +19,12 @@ import { useRouter } from 'next/router';
 import Searchbar from './Searchbar';
 import MiniSearchbar from './MiniSearchbar';
 import { MdNewspaper } from "react-icons/md";
+import { useStateContext } from '../context';
 
 function Navbar() {
     const address = "";
     const [activePage, setActivePage] = useState("/");
-    const connect = () => {
-        alert("Gopal Verma")
-    }
+    const { connectToPolygonMumbai, connect } = useStateContext();
     const router = useRouter();
 
     useEffect(() => {

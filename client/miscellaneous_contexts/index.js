@@ -4,11 +4,14 @@ const MiscellaneousStateContext = createContext();
 
 export const MiscellaneousStateContextProvider = ({ children }) => {
     const [chatToggleDrawer, setChatToggleDrawer] = useState(false)
+    const [isAddRoomModalOpen, setIsAddRoomModalOpen] = useState(false);
     return (
         <MiscellaneousStateContext.Provider
             value={{
                 chatToggleDrawer,
-                setChatToggleDrawer
+                setChatToggleDrawer,
+                isAddRoomModalOpen,
+                setIsAddRoomModalOpen
             }}
         >
             {children}
