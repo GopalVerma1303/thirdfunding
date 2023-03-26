@@ -11,12 +11,16 @@ function ConversationList(props: any) {
     const CommunityMenuToggleDrawer = (value: boolean) => {
         setChatToggleDrawer(value);
     }
-    
-    getDocs(collection(db,`servers/${props.serverId}/members`)).then((snap)=>{
-        snap.forEach((doc)=>{
-            console.log("Member", doc.data());
+    useEffect(()=>{
+        if(props.serverId){
+        getDocs(collection(db,`servers/${props.serverId}/members`)).then((snap)=>{
+            snap.forEach((doc)=>{
+                console.log("Member", doc.data());
+            })
         })
-    })
+    }
+    },[props.serverId])
+   
     return (
         <div className=' w-[250px] h-full bg-[#1c1c24] flex flex-col'>
             <div className='w-full top-0 relative p-3 bg-[#272732] uppercase justify-between md:justify-center items-center flex font-bold text-[#808191]'>

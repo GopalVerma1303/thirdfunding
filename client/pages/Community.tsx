@@ -15,35 +15,39 @@ function Community() {
   const router=useRouter();
   const address=useAddress();
   const [user,setUser]=useState("");
+
   console.log(address);
 //   const address=useAddress();
 //   console.log(address);
 //   // Another Option is to display it at main page itselt U Decide!
+    useEffect(()=>{
+      if(address && router.isReady){
+        getDoc(doc(db, "users", address)).then(docSnap => {
+          if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            setUser(docSnap.data().username);
+          } else {
+             let randUser=generateUsername();
+             setUser(randUser);
+            setDoc(doc(db,`users`,address),{
+              "username":randUser,
+              "walletAddress":address,
+              "timeStamp":new Date()
+            }).then(()=>{
+              console.log("Done")
+           
+            }).catch((err)=>{
+              alert("Error");
+            })
+          
+          }
+        })
+      }
+
+    },[address,router.isReady])
+
     
-   if(typeof window !==undefined){
-    if(address){
-      getDoc(doc(db, "users", address)).then(docSnap => {
-        if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
-          setUser(docSnap.data().username);
-        } else {
-           let randUser=generateUsername();
-           setUser(randUser);
-          setDoc(doc(db,`users`,address),{
-            "username":randUser,
-            "walletAddress":address,
-            "timeStamp":new Date()
-          }).then(()=>{
-            console.log("Done")
-         
-          }).catch((err)=>{
-            alert("Error");
-          })
-        
-        }
-      })
-    }
-  }
+  
   const { chatToggleDrawer } = useStateContext();
   return (
     <div className='flex justify-start flex-row rounded-[10px] sm:h-[82vh] h-[89vh] top-[70px] sm:top-0 absolute  left-0 right-0  sm:relative'>

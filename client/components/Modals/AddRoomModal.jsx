@@ -17,7 +17,7 @@ const AddRoomModal = ({ showModal, closeModal,username }) => {
     
    
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
     //     // TODO: submit the form data to say Hi to the user
         addDoc(collection(db,`users/${address}/servers`),{
@@ -26,6 +26,7 @@ const AddRoomModal = ({ showModal, closeModal,username }) => {
         }).then((server)=>{
             setDoc(doc(db,`servers`,server.id),{
                 "serverName":name,
+                "serverId":server.id,
                 "timeStamp":new Date()
             }).then(()=>{
                 setDoc(doc(db,`servers`,server.id,`members`,address),{
@@ -34,6 +35,7 @@ const AddRoomModal = ({ showModal, closeModal,username }) => {
                     "timeStamp":new Date()
                 })
                 console.log("Done Is");
+                
             })
         })
        

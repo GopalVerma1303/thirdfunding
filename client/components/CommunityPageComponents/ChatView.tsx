@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MessageFormField from './MessageFormField'
 import { HiArrowLeft } from "react-icons/hi2";
 import { FaTelegramPlane } from "react-icons/fa";
@@ -8,25 +8,43 @@ import Message from '../../assets/chat';
 import { useStateContext } from '../../miscellaneous_contexts'
 import JoinBtn from './JoinBtn';
 import DisjoinBtn from './DisjoinBtn';
-import { addDoc, collection, doc, getDoc, getDocs, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAddress } from '@thirdweb-dev/react';
+import { useRouter } from 'next/router';
 
 function ChatView(props: any) {
     const [message,setMessage]=useState("");
     const [lOfMesage,setlom]=useState([]);
+    const router=useRouter();
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
     const address=useAddress();
-    getDocs(collection(db,`servers/${props.serverId}/messages`)).then((snap)=>{
+    useEffect(()=>{
+        if(props.serverId && router.isReady){
+            getDocs(collection(db,`servers/${props.serverId}/messages`)).then((snap)=>{
        
-        snap.forEach((doc)=>{
-            console.log("Message,", doc.data());
-        })
-
-    
-    }).catch((err)=>{
-        console.log(err);
-    })
+                snap.forEach((doc)=>{
+                    console.log("Message,", doc.data());
+                })
+        
+            
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }
+        
+    },[props.serverId,router.isReady])
+    useEffect(()=>{
+        if(router.isReady && props.serverId){
+            const q=query(collection(db,`servers/${props.serverId}/messages`));
+            const unsub=onSnapshot(q,(snapshot)=>{
+                snapshot.docChanges().forEach((change)=>{
+                    console.log("New Message", change.doc.data());
+                })
+            })
+        }
+    },[props.serverId,router.isReady])
+   
     
     const handleClick =async()=>{
         addDoc(collection(db,`servers/${props.serverId}/messages`),{
@@ -34,9 +52,7 @@ function ChatView(props: any) {
             "Sender":address
         }).then(()=>{
             alert("Sent");
-            
-            
-    })
+            })
     }
     const CommunityMenuToggleDrawer = (value: boolean) => {
         setChatToggleDrawer(value);
@@ -65,11 +81,11 @@ function ChatView(props: any) {
                 </div>
             </div>
             <div className=' flex flex-col overflow-y-scroll text-white p-3 h-full '>
-                {
+                {/* {
                     Message.map(e => (
                         <ChatMessage message={e.message} sender={e.username} imageUrl={e.profilePic} created_at={e.created_at} />
                     ))
-                }
+                } */}
             </div>
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
                 <form className='flex items-center mx-5'>
