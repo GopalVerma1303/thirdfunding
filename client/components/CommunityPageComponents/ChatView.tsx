@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MessageFormField from './MessageFormField'
 import { HiArrowLeft } from "react-icons/hi2";
 import { FaTelegramPlane } from "react-icons/fa";
@@ -8,11 +8,35 @@ import Message from '../../assets/chat';
 import { useStateContext } from '../../miscellaneous_contexts'
 import JoinBtn from './JoinBtn';
 import DisjoinBtn from './DisjoinBtn';
+import { addDoc, collection, doc, getDoc, getDocs, setDoc, where } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { useAddress } from '@thirdweb-dev/react';
 
-function ChatView() {
+function ChatView(props: any) {
+    const [message,setMessage]=useState("");
+    const [lOfMesage,setlom]=useState([]);
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
-    function handleFormFieldChange(arg0: string, e: any): void {
-        throw new Error('Function not implemented.')
+    const address=useAddress();
+    getDocs(collection(db,`servers/${props.serverId}/messages`)).then((snap)=>{
+       
+        snap.forEach((doc)=>{
+            console.log("Message,", doc.data());
+        })
+
+    
+    }).catch((err)=>{
+        console.log(err);
+    })
+    
+    const handleClick =async()=>{
+        addDoc(collection(db,`servers/${props.serverId}/messages`),{
+            "Message":message,
+            "Sender":address
+        }).then(()=>{
+            alert("Sent");
+            
+            
+    })
     }
     const CommunityMenuToggleDrawer = (value: boolean) => {
         setChatToggleDrawer(value);
@@ -37,7 +61,7 @@ function ChatView() {
                         </div>
                     </div>
                     {/* <JoinBtn /> */}
-                    <DisjoinBtn />
+                    <DisjoinBtn  />
                 </div>
             </div>
             <div className=' flex flex-col overflow-y-scroll text-white p-3 h-full '>
@@ -50,14 +74,16 @@ function ChatView() {
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
                 <form className='flex items-center mx-5'>
                     <BsFillChatLeftDotsFill className='text-[20px] text-[#666d7b] mr-2' />
-                    <MessageFormField
-                        lableName="Your Name *"
-                        placeholder="Write your message"
-                        inputType="text"
-                        value=""
-                        handleChange={(e) => handleFormFieldChange("name", e)}
-                        isTextArea={false} />
-                    <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' />
+                    <input
+                        required
+                        onChange={(e)=>{setMessage(e.target.value)}}
+                        type={"text"}
+                        step="0.1"
+                        placeholder={"Enter The message"}
+                        className="flex w-full py-[15px] sm:px-[px]  outline-none border-[1px] border-[#3E3E4E] bg-transparent font-epilogue text-white text-[14px] placeholder:text-[#676f7e] rounded-[10px] "
+                    >
+                    </input>
+                    <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' onClick={handleClick} />
                 </form>
             </div>
         </div>

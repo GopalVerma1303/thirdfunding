@@ -3,13 +3,13 @@ import { FaPlus } from "react-icons/fa";
 import { useStateContext } from '../../miscellaneous_contexts';
 import AddRoomModal from '../Modals/AddRoomModal';
 
-function AddRoomAvatar() {
+function AddRoomAvatar(props:any) {
     const { isAddRoomModalOpen, setIsAddRoomModalOpen } = useStateContext()
     const [showModal, setShowModal] = useState(false)
     const handleSayHiClick = () => {
         setShowModal(true);
     };
-
+   
     const handleCloseModal = () => {
         setShowModal(false);
     };
@@ -18,7 +18,7 @@ function AddRoomAvatar() {
             <div onClick={() => setIsAddRoomModalOpen(!isAddRoomModalOpen)} className=' bg-[#58586b] hover:cursor-pointer justify-center items-center flex w-[40px] h-[40px] rounded-full flex-shrink-0 my-[6px] mb-5'>
                 <FaPlus className=' text-[#bdbac6]' />
             </div>
-            <AddRoomModal showModal={isAddRoomModalOpen} closeModal={() => setIsAddRoomModalOpen(!isAddRoomModalOpen)} />
+            <AddRoomModal username={props.username} showModal={isAddRoomModalOpen} closeModal={() => setIsAddRoomModalOpen(!isAddRoomModalOpen)} />
         </>
 
     )

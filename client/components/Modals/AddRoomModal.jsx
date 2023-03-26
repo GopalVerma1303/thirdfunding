@@ -1,13 +1,42 @@
+import { useAddress } from '@thirdweb-dev/react';
+
 import { useState } from 'react';
 
+import { db,app } from '../../firebase/index'
+import { addDoc,getDoc,deleteDoc,updateDoc, collection, where, query, onSnapshot, setDoc, doc } from 'firebase/firestore'
+import { useRouter } from 'next/router'
 
-const AddRoomModal = ({ showModal, closeModal }) => {
+
+const AddRoomModal = ({ showModal, closeModal,username }) => {
+    const address=useAddress();
+    const router=useRouter();
     const [name, setName] = useState('');
     // const [showModal, setShowModal] = useState(false);
 
+   
+    
+   
+    
     const handleSubmit = (event) => {
         event.preventDefault();
-        // TODO: submit the form data to say Hi to the user
+    //     // TODO: submit the form data to say Hi to the user
+        addDoc(collection(db,`users/${address}/servers`),{
+            "serverName":name,
+            "timeStamp":new Date()
+        }).then((server)=>{
+            setDoc(doc(db,`servers`,server.id),{
+                "serverName":name,
+                "timeStamp":new Date()
+            }).then(()=>{
+                setDoc(doc(db,`servers`,server.id,`members`,address),{
+                    "walletAddress":address,
+                    "username":username,
+                    "timeStamp":new Date()
+                })
+                console.log("Done Is");
+            })
+        })
+       
         closeModal();
     };
 
