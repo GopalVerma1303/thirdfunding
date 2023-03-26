@@ -60,16 +60,16 @@ function ChatView(props: any) {
                             {/* <p className="text-[13px] text-[#808191] font-bold">{name}</p> */}
                         </div>
                     </div>
-                    {/* <JoinBtn /> */}
-                    <DisjoinBtn  />
+                    <JoinBtn />
+                    {/* <DisjoinBtn /> */}
                 </div>
             </div>
             <div className=' flex flex-col overflow-y-scroll text-white p-3 h-full '>
-                {/* {
+                {
                     Message.map(e => (
                         <ChatMessage message={e.message} sender={e.username} imageUrl={e.profilePic} created_at={e.created_at} />
                     ))
-                } */}
+                }
             </div>
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
                 <form className='flex items-center mx-5'>
