@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FaLink } from "react-icons/fa";
 import { useStateContext } from '../../miscellaneous_contexts';
-import AddRoomModal from '../Modals/AddRoomModal';
 
 function JoinRoomAvatar() {
     const { isAddRoomModalOpen, setIsAddRoomModalOpen } = useStateContext()
