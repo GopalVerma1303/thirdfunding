@@ -15,7 +15,7 @@ function AddRoomAvatar(props:any) {
     };
     return (
         <>
-            <div onClick={() => setIsAddRoomModalOpen(!isAddRoomModalOpen)} className=' bg-[#58586b] hover:cursor-pointer justify-center items-center flex w-[40px] h-[40px] rounded-full flex-shrink-0 my-[6px] mb-5'>
+            <div onClick={() => setIsAddRoomModalOpen(!isAddRoomModalOpen)} className=' bg-[#58586b] hover:cursor-pointer justify-center items-center flex w-[40px] h-[40px] rounded-full flex-shrink-0 my-[6px]'>
                 <FaPlus className=' text-[#bdbac6]' />
             </div>
             <AddRoomModal username={props.username} showModal={isAddRoomModalOpen} closeModal={() => setIsAddRoomModalOpen(!isAddRoomModalOpen)} />

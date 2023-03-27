@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AddRoomAvatar from './AddRoomAvatar'
+import JoinRoomAvatar from './JoinRoomAvatar'
 import RoomAvatar from './RoomAvatar'
 import { useAddress } from '@thirdweb-dev/react'
 import { generateUsername } from 'unique-username-generator'
@@ -57,6 +58,7 @@ function RoomList(props:any) {
                 {rooms}
               
                 <AddRoomAvatar username={props.userName}/>
+                <JoinRoomAvatar />
             </div>
         </div>
     )
