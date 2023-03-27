@@ -42,7 +42,7 @@ function RoomList(props:any) {
                         console.log("New Room", change.doc.data());
                     }
                 });
-                setRooms((rooms)=>rooms.concat(arr));
+                setRooms((rooms)=>[].concat(rooms,arr));
                 
                 
             })

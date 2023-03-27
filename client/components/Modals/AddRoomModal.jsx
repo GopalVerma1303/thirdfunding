@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 const AddRoomModal = ({ showModal, closeModal,username }) => {
     const address=useAddress();
     const router=useRouter();
-    const [name, setName] = useState('');
+    const [name, setName] = useState("");
     // const [showModal, setShowModal] = useState(false);
 
    
@@ -58,7 +58,7 @@ const AddRoomModal = ({ showModal, closeModal,username }) => {
                                 <div className="mt-3 text-center sm:mt-5">
                                     <h3 className="text-lg leading-6 font-medium text-white">Create room</h3>
                                     <div className="mt-2">
-                                        <form onSubmit={handleSubmit}>
+                                 
                                             <div className="mb-4">
                                                 <label htmlFor="name" className="block text-gray-500 font-bold mb-2">
                                                     What's your room name?
@@ -66,7 +66,7 @@ const AddRoomModal = ({ showModal, closeModal,username }) => {
                                                 <input
                                                     type="text"
                                                     id="name"
-                                                    value={name}
+                                                
                                                     placeholder="Enter room name"
                                                     onChange={(event) => setName(event.target.value)}
                                                     className=" placeholder-[#666d7b] shadow appearance-none border rounded w-full py-2 px-3 text-white bg-[#3e3e4e] border-none leading-tight focus:outline-none focus:shadow-outline"
@@ -81,13 +81,14 @@ const AddRoomModal = ({ showModal, closeModal,username }) => {
                                                     Discard
                                                 </button>
                                                 <button
-                                                    type="submit"
+                                                    type="button"
+                                                    onClick={()=>{alert("New")}}
                                                     className="py-2 px-4 border border-transparent rounded-md text-white bg-[#8C6DFD] hover:bg-[#7359d2] focus:outline-none focus:shadow-outline-blue focus:border-[#7359d2] active:bg-[#7359d2]"
                                                 >
                                                     Create
                                                 </button>
                                             </div>
-                                        </form>
+                                      
                                     </div>
                                 </div>
                             </div>

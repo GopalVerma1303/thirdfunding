@@ -11,11 +11,14 @@ import { addDoc,getDoc,deleteDoc,updateDoc, collection, where, query, onSnapshot
 import { useRouter } from 'next/router'
 import { type } from 'os'
 
+import AddRoomModal from '../../client/components/Modals/AddRoomModal';
+
+
 function Community() {
   const router=useRouter();
   const address=useAddress();
   const [user,setUser]=useState("");
-
+  const { isAddRoomModalOpen, setIsAddRoomModalOpen } = useStateContext();
   console.log(address);
 //   const address=useAddress();
 //   console.log(address);
@@ -51,6 +54,7 @@ function Community() {
   const { chatToggleDrawer } = useStateContext();
   return (
     <div className='flex justify-start flex-row rounded-[10px] sm:h-[82vh] h-[89vh] top-[70px] sm:top-0 absolute  left-0 right-0  sm:relative'>
+      <AddRoomModal username={user} showModal={isAddRoomModalOpen} closeModal={() => setIsAddRoomModalOpen(!isAddRoomModalOpen)} />
       <div className='flex-row hidden md:inline-flex'>
         <RoomList userName={user} />
         <ConversationList serverId={router.query["server"]}/>
