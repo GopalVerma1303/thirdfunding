@@ -60,6 +60,7 @@ function ChatView(props: any) {
             "timeStamp": new Date()
         }).then(()=>{
             console.log("Sent");
+            setMessage("");
             })
     }
     const CommunityMenuToggleDrawer = (value: boolean) => {

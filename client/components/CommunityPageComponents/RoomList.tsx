@@ -5,48 +5,58 @@ import RoomAvatar from './RoomAvatar'
 import { useAddress } from '@thirdweb-dev/react'
 import { generateUsername } from 'unique-username-generator'
 import { db } from '../../firebase/index'
-import { addDoc,getDoc,deleteDoc,updateDoc, collection, query, onSnapshot, getDocs } from 'firebase/firestore'
+import { addDoc,getDoc,deleteDoc,updateDoc, collection, query, onSnapshot, getDocs, limitToLast, orderBy, limit, clearIndexedDbPersistence } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { type } from 'os'
+import { timeStamp } from 'console'
 
 function RoomList(props:any) {
     const address=useAddress();
     const router=useRouter();
     const [rooms,setRooms]=useState([]);
+    
     console.log("Address", address); 
-    // useEffect(()=>{
-    //     if(router.isReady){
-    //     getDocs(collection(db,`servers`)).then((snap)=>{
-    //         const room2=[];
-    //         snap.forEach((doc)=>{
-    //             console.log(doc.data());
-    //             room2.push(<RoomAvatar/>)
-    //         })
-    //         if(room2.length>0){
-
-    //             setRooms(room2);
-    //         }
-    //     })
-    //     }
-    // },[router.isReady])
     useEffect(()=>{
         if(router.isReady){
+        getDocs(query(collection(db,`servers`),orderBy("timeStamp","desc"))).then((snap)=>{
+            const room2=[];
+            snap.forEach((doc)=>{
+           
+                room2.push(<RoomAvatar/>)
+            })
+            if(room2.length>0){
+
+                setRooms(room2);
+            }
+        })
+        }
+    },[router.isReady])
+    useEffect(()=>{
+     
             const q=query(collection(db,"servers"));
             const unsub=onSnapshot(q,(snapshot)=>{
-                const arr=[];
-                snapshot.docChanges().forEach((change)=>{
-                    console.log(change);
-                    if(change.type==='added'){
-                        console.log(change.doc.id);
-                        arr.push(<RoomAvatar/>);
-                        console.log("New Room", change.doc.data());
-                    }
-                });
-                setRooms((rooms)=>[].concat(rooms,arr));
+      
+                
+              
+                 
+                if(snapshot.docChanges().length>0){
+                    getDocs(query(collection(db,`servers`),orderBy("timeStamp","desc"))).then((snap)=>{
+                        const room2=[];
+                        snap.forEach((doc)=>{
+                       
+                            room2.push(<RoomAvatar/>)
+                        })
+                        if(room2.length>0){
+            
+                            setRooms(room2);
+                        }
+                    })
+                }
+            
                 
                 
             })
-        }
+    
     },[router.isReady])
     
     console.log(rooms);
@@ -58,7 +68,7 @@ function RoomList(props:any) {
                 {rooms}
               
                 <AddRoomAvatar username={props.userName}/>
-                <JoinRoomAvatar />
+                <JoinRoomAvatar username={props.userName} />
             </div>
         </div>
     )

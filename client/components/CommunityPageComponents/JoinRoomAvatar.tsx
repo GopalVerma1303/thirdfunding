@@ -1,12 +1,24 @@
+import { useAddress } from '@thirdweb-dev/react';
+import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { FaLink } from "react-icons/fa";
+import { db } from '../../firebase';
 import { useStateContext } from '../../miscellaneous_contexts';
 import AddRoomModal from '../Modals/AddRoomModal';
 
-function JoinRoomAvatar() {
+function JoinRoomAvatar(props: any ) {
     const { isAddRoomModalOpen, setIsAddRoomModalOpen } = useStateContext()
     const [showModal, setShowModal] = useState(false);
     const [name, setName] = useState("")
+    const address=useAddress();
+    const handleClick =async()=>{
+        addDoc(collection(db,"members"),{
+            "username":props.username,
+            "walletAddress":address,
+            "serverId":name,
+            "timeStamp":new Date()
+        }).then(()=>{alert("Joined The Group"),setShowModal(false)})
+    }
     return (
         <>
             <div onClick={() => setShowModal(true)} className=' bg-[#58586b] hover:cursor-pointer justify-center items-center flex w-[40px] h-[40px] rounded-full flex-shrink-0 my-[6px] mb-20'>
@@ -50,7 +62,7 @@ function JoinRoomAvatar() {
                                                     Discard
                                                 </button>
                                                 <button
-                                                    onClick={() => alert("Room Joined!!!")}
+                                                    onClick={handleClick}
                                                     type="button"
                                                     className="py-2 px-4 border border-transparent rounded-md text-white bg-[#8C6DFD] hover:bg-[#7359d2] focus:outline-none focus:shadow-outline-blue focus:border-[#7359d2] active:bg-[#7359d2]"
                                                 >
