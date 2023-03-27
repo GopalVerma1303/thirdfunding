@@ -1,5 +1,6 @@
 import React from 'react'
 import AddRoomAvatar from './AddRoomAvatar'
+import JoinRoomAvatar from './JoinRoomAvatar'
 import RoomAvatar from './RoomAvatar'
 
 function RoomList() {
@@ -55,6 +56,7 @@ function RoomList() {
                 <RoomAvatar />
                 <RoomAvatar />
                 <AddRoomAvatar />
+                <JoinRoomAvatar />
             </div>
         </div>
     )

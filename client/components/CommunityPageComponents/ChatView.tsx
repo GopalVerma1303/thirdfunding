@@ -36,8 +36,8 @@ function ChatView() {
                             {/* <p className="text-[13px] text-[#808191] font-bold">{name}</p> */}
                         </div>
                     </div>
-                    <JoinBtn />
-                    {/* <DisjoinBtn /> */}
+                    {/* <JoinBtn /> */}
+                    <DisjoinBtn />
                 </div>
             </div>
             <div className=' flex flex-col overflow-y-scroll text-white p-3 h-full '>

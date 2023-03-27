@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 
-const AddRoomModal = ({ showModal, closeModal }) => {
+const JoinRoomModal = ({ showModal, closeModal }) => {
     const [name, setName] = useState('');
     // const [showModal, setShowModal] = useState(false);
 
@@ -25,18 +25,18 @@ const AddRoomModal = ({ showModal, closeModal }) => {
                         <div className="inline-block align-bottom bg-[#2d2d39] rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                             <div>
                                 <div className="mt-3 text-center sm:mt-5">
-                                    <h3 className="text-lg leading-6 font-medium text-white">Create room</h3>
+                                    <h3 className="text-lg leading-6 font-medium text-white">Join room</h3>
                                     <div className="mt-2">
                                         <form onSubmit={handleSubmit}>
                                             <div className="mb-4">
                                                 <label htmlFor="name" className="block text-gray-500 font-bold mb-2">
-                                                    What's your room name?
+                                                    What's the room ID?
                                                 </label>
                                                 <input
                                                     type="text"
                                                     id="name"
                                                     value={name}
-                                                    placeholder="Enter room name"
+                                                    placeholder="Enter room ID"
                                                     onChange={(event) => setName(event.target.value)}
                                                     className=" placeholder-[#666d7b] shadow appearance-none border rounded w-full py-2 px-3 text-white bg-[#3e3e4e] border-none leading-tight focus:outline-none focus:shadow-outline"
                                                 />
@@ -68,4 +68,4 @@ const AddRoomModal = ({ showModal, closeModal }) => {
     );
 };
 
-export default AddRoomModal;
+export default JoinRoomModal;
