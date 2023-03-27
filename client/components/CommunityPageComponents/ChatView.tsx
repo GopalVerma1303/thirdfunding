@@ -19,14 +19,15 @@ function ChatView(props: any) {
     const router=useRouter();
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
     const address=useAddress();
+    const [messages,setMessages]=useState([]);
     useEffect(()=>{
         if(props.serverId && router.isReady){
             getDocs(collection(db,`servers/${props.serverId}/messages`)).then((snap)=>{
-       
+                const arr:JSX.Element[]=[];
                 snap.forEach((doc)=>{
-                    console.log("Message,", doc.data());
+                    arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
                 })
-        
+                setMessages(arr);
             
             }).catch((err)=>{
                 console.log(err);
@@ -38,9 +39,15 @@ function ChatView(props: any) {
         if(router.isReady && props.serverId){
             const q=query(collection(db,`servers/${props.serverId}/messages`));
             const unsub=onSnapshot(q,(snapshot)=>{
+                const arr=[];
                 snapshot.docChanges().forEach((change)=>{
-                    console.log("New Message", change.doc.data());
+                    if(change.type==='added'){
+                    arr.push(<ChatMessage message={change.doc.data().Message} sender={change.doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={change.doc.data().timeStamp} />)
+                    }
                 })
+                setMessages((messages)=>[].concat(messages,arr));
+              
+                
             })
         }
     },[props.serverId,router.isReady])
@@ -49,9 +56,10 @@ function ChatView(props: any) {
     const handleClick =async()=>{
         addDoc(collection(db,`servers/${props.serverId}/messages`),{
             "Message":message,
-            "Sender":address
+            "Sender":props.username,
+            "timeStamp": new Date()
         }).then(()=>{
-            alert("Sent");
+            console.log("Sent");
             })
     }
     const CommunityMenuToggleDrawer = (value: boolean) => {
@@ -86,6 +94,7 @@ function ChatView(props: any) {
                         <ChatMessage message={e.message} sender={e.username} imageUrl={e.profilePic} created_at={e.created_at} />
                     ))
                 } */}
+                {messages}
             </div>
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
                 <form className='flex items-center mx-5'>

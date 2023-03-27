@@ -55,7 +55,7 @@ function Community() {
         <RoomList userName={user} />
         <ConversationList serverId={router.query["server"]}/>
       </div>
-      <ChatView serverId={router.query["server"]} />
+      <ChatView serverId={router.query["server"]} username={user} />
       {
         chatToggleDrawer && <ConversationInbox /> // Confusion
       }
