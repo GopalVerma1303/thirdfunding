@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FaPlus } from "react-icons/fa";
 import { useStateContext } from '../../miscellaneous_contexts';
-import AddRoomModal from '../Modals/AddRoomModal';
 
 function AddRoomAvatar() {
     const { isAddRoomModalOpen, setIsAddRoomModalOpen } = useStateContext()
