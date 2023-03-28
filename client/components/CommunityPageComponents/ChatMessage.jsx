@@ -1,13 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-interface Props {
-    message: string,
-    sender: string,
-    imageUrl: string,
-    created_at: number
-}
-const ChatMessage = ({ message, sender, imageUrl, created_at }: Props) => {
+const ChatMessage = ({ message, sender, imageUrl, created_at }) => {
     const user = "Gopal Verma"
     return (
         <div className={`flex w-full my-2 ${sender == "Gopal Verma" && "justify-end ml-auto"}`}>
@@ -27,7 +21,7 @@ const ChatMessage = ({ message, sender, imageUrl, created_at }: Props) => {
                     <div className={`px-3 py-2 rounded-lg w-fit text-white ${sender == "Gopal Verma" ? " bg-[#4ACD8D]" : "bg-[#8c6dfd]  "}`} >
                         <p>{message}</p>
                     </div>
-                    <p className={`text-[0.65rem] italic px-2 text-gray-500 ${sender == "Gopal Verma" && "order-2"}`}>{new Date(created_at.seconds*1000).toLocaleString()}</p>
+                    <p className={`text-[0.65rem] italic px-2 text-gray-500 ${sender == "Gopal Verma" && "order-2"}`}>{new Date(created_at.seconds * 1000).toLocaleString()}</p>
                 </div>
             </div>
         </div>
