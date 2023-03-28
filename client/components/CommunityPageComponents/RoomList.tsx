@@ -9,6 +9,7 @@ import { addDoc,getDoc,deleteDoc,updateDoc, collection, query, onSnapshot, getDo
 import { useRouter } from 'next/router'
 import { type } from 'os'
 import { timeStamp } from 'console'
+import Link from 'next/link'
 
 function RoomList(props:any) {
     const address=useAddress();
@@ -22,7 +23,7 @@ function RoomList(props:any) {
             const room2=[];
             snap.forEach((doc)=>{
            
-                room2.push(<RoomAvatar/>)
+                room2.push(<Link href={`/Community?server=${doc.id}`}><RoomAvatar serverId={doc.id}/></Link>)
             })
             if(room2.length>0){
 
@@ -44,7 +45,7 @@ function RoomList(props:any) {
                         const room2=[];
                         snap.forEach((doc)=>{
                        
-                            room2.push(<RoomAvatar/>)
+                            room2.push(<Link href={`/Community?server=${doc.id}`}><RoomAvatar serverId={doc.id}/></Link>)
                         })
                         if(room2.length>0){
             

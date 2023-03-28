@@ -8,7 +8,7 @@ import Message from '../../assets/chat';
 import { useStateContext } from '../../miscellaneous_contexts'
 import JoinBtn from './JoinBtn';
 import DisjoinBtn from './DisjoinBtn';
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAddress } from '@thirdweb-dev/react';
 import { useRouter } from 'next/router';
@@ -22,7 +22,7 @@ function ChatView(props: any) {
     const [messages,setMessages]=useState([]);
     useEffect(()=>{
         if(props.serverId && router.isReady){
-            getDocs(collection(db,`servers/${props.serverId}/messages`)).then((snap)=>{
+            getDocs(query(collection(db,`servers/${props.serverId}/messages`),orderBy("timeStamp","asc"))).then((snap)=>{
                 const arr:JSX.Element[]=[];
                 snap.forEach((doc)=>{
                     arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
@@ -37,7 +37,7 @@ function ChatView(props: any) {
     },[props.serverId,router.isReady])
     useEffect(()=>{
         if(router.isReady && props.serverId){
-            const q=query(collection(db,`servers/${props.serverId}/messages`));
+            const q=query(collection(db,`servers/${props.serverId}/messages`),orderBy("timeStamp","desc"));
             const unsub=onSnapshot(q,(snapshot)=>{
                 const arr=[];
                 snapshot.docChanges().forEach((change)=>{
