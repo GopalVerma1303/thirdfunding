@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react'
 import ConversationTile from './ConversationTile'
 import { HiArrowRight } from "react-icons/hi2";
 import { useStateContext } from '../../miscellaneous_contexts';
-import { collection, getDocs,doc, onSnapshot, query, where, orderBy } from 'firebase/firestore';
+import { collection, getDocs,doc, onSnapshot, query, where, orderBy, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { useRouter } from 'next/router';
+import  { useRouter } from 'next/router';
 
 function ConversationList(props: any) {
     const [members,setMembers]=useState([]);
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
+    const router=useRouter();
     const CommunityMenuToggleDrawer = (value: boolean) => {
         setChatToggleDrawer(value);
     }
     useEffect(()=>{
-        if(props.serverId){
+        if(props.serverId && router.isReady){
         getDocs(query(collection(db,`members`),where("serverId","==",props.serverId))).then((snap)=>{
             const arr:JSX.Element[]=[];
             snap.forEach((doc)=>{
@@ -22,34 +23,31 @@ function ConversationList(props: any) {
             setMembers(arr);
         })
     }
-    },[props.serverId])
+    },[props.serverId,router.isReady])
+   
     useEffect(()=>{
-        if(props.serverId){
-            const q=query(collection(db,"members"));
+        if(props.serverId && router.isReady){
+            const q=query(collection(db,"members"),where("serverId","==",props.serverId));
             const unsub=onSnapshot(q,(snapshot)=>{
+                
+               if(snapshot.docChanges().length>0){
+                   getDocs(query(collection(db,`members`),where("serverId","==",props.serverId))).then((snap)=>{
+                       const arr:JSX.Element[]=[];
+                       snap.forEach((doc)=>{
+                          arr.push( <ConversationTile name={doc.data().username} avatarUrl='https://cdn-icons-png.flaticon.com/512/149/149071.png' />)
+                       })
+                       setMembers(arr);
+                   })
+               }
       
                 
               
-                 
-                if(snapshot.docChanges().length>0){
-                    getDocs(query(collection(db,`members`),where("serverId","==",props.serverId))).then((snap)=>{
-                        const room2=[];
-                        snap.forEach((doc)=>{
-                       
-                            room2.push(<ConversationTile name={doc.data().username} avatarUrl='https://cdn-icons-png.flaticon.com/512/149/149071.png' />)
-                        })
-                        if(room2.length>0){
-            
-                            setMembers(room2);
-                        }
-                    })
-                }
             
                 
                 
             })
     }
-    },[props.serverId])
+    },[props.serverId,router.isReady])
    //Add Realtime member add
     return (
         <div className=' w-[250px] h-full bg-[#1c1c24] flex flex-col'>

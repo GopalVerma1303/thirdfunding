@@ -23,6 +23,7 @@ function AddRoomAvatar(props:any) {
     const handleSubmit = async () => {
    
     //     // TODO: submit the form data to say Hi to the user
+    if(address){
         addDoc(collection(db,`servers`),{
             "serverName":name,
             "timeStamp":new Date()
@@ -42,6 +43,10 @@ function AddRoomAvatar(props:any) {
                 
             })
         })
+    }
+    else{
+        alert("Link Wallet");
+    }
         setShowModal(!showModal);
     };
 
