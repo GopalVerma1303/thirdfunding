@@ -7,7 +7,7 @@ import ChatMessage from './ChatMessage ';
 import Message from '../../assets/chat';
 import { useStateContext } from '../../miscellaneous_contexts'
 import JoinBtn from './JoinBtn';
-import DisjoinBtn from './DisjoinBtn';
+
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, Timestamp, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAddress } from '@thirdweb-dev/react';
