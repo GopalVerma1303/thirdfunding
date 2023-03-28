@@ -27,7 +27,7 @@ const ChatMessage = ({ message, sender, imageUrl, created_at }: Props) => {
                     <div className={`px-3 py-2 rounded-lg w-fit text-white ${sender == "Gopal Verma" ? " bg-[#4ACD8D]" : "bg-[#8c6dfd]  "}`} >
                         <p>{message}</p>
                     </div>
-                    <p className={`text-[0.65rem] italic px-2 text-gray-500 ${sender == "Gopal Verma" && "order-2"}`}>{new Date(created_at).toLocaleString()}</p>
+                    <p className={`text-[0.65rem] italic px-2 text-gray-500 ${sender == "Gopal Verma" && "order-2"}`}>{new Date(created_at.seconds*1000).toLocaleString()}</p>
                 </div>
             </div>
         </div>
