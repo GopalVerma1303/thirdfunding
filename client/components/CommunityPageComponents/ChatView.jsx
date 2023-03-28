@@ -3,7 +3,7 @@ import MessageFormField from './MessageFormField'
 import { HiArrowLeft } from "react-icons/hi2";
 import { FaTelegramPlane } from "react-icons/fa";
 import { BsFillChatLeftDotsFill } from "react-icons/bs";
-import ChatMessage from './ChatMessage ';
+import ChatMessage from './ChatMessage';
 import Message from '../../assets/chat';
 import { useStateContext } from '../../miscellaneous_contexts'
 import JoinBtn from './JoinBtn';
@@ -14,118 +14,118 @@ import { useAddress } from '@thirdweb-dev/react';
 import { useRouter } from 'next/router';
 
 function ChatView(props: any) {
-    const [message,setMessage]=useState("");
-    const [lOfMesage,setlom]=useState([]);
-    const [serverName,setServer]=useState("");
-    const [joined,setJoin]=useState(false);
-    const router=useRouter();
+    const [message, setMessage] = useState("");
+    const [lOfMesage, setlom] = useState([]);
+    const [serverName, setServer] = useState("");
+    const [joined, setJoin] = useState(false);
+    const router = useRouter();
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
-    const address=useAddress();
-    const [messages,setMessages]=useState([]);
-    useEffect(()=>{
-        if(props.serverId && router.isReady){
-            getDocs(query(collection(db,`servers/${props.serverId}/messages`),orderBy("timeStamp","asc"))).then((snap)=>{
-                const arr:JSX.Element[]=[];
-                snap.forEach((doc)=>{
+    const address = useAddress();
+    const [messages, setMessages] = useState([]);
+    useEffect(() => {
+        if (props.serverId && router.isReady) {
+            getDocs(query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "asc"))).then((snap) => {
+                const arr: JSX.Element[] = [];
+                snap.forEach((doc) => {
                     arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
                 })
                 setMessages(arr);
-            
-            }).catch((err)=>{
+
+            }).catch((err) => {
                 console.log(err);
             })
         }
-        
-    },[props.serverId,router.isReady])
-    useEffect(()=>{
-        if(props.serverId && router.isReady){
-            getDoc(doc(db,"servers",props.serverId)).then((doc)=>{
-                if(doc.exists()){
-                setServer(doc.data().serverName);
+
+    }, [props.serverId, router.isReady])
+    useEffect(() => {
+        if (props.serverId && router.isReady) {
+            getDoc(doc(db, "servers", props.serverId)).then((doc) => {
+                if (doc.exists()) {
+                    setServer(doc.data().serverName);
                 }
             })
         }
-        
-    },[props.serverId,router.isReady])
-    useEffect(()=>{
-        if(router.isReady && props.serverId){
-            const q=query(collection(db,`servers/${props.serverId}/messages`),orderBy("timeStamp","desc"));
-            const unsub=onSnapshot(q,(snapshot)=>{
-                const arr=[];
-               getDocs(query(collection(db,`servers/${props.serverId}/messages`),orderBy("timeStamp","asc"))).then((snap)=>{
-                const arr:JSX.Element[]=[];
-                snap.forEach((doc)=>{
-                    arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
+
+    }, [props.serverId, router.isReady])
+    useEffect(() => {
+        if (router.isReady && props.serverId) {
+            const q = query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "desc"));
+            const unsub = onSnapshot(q, (snapshot) => {
+                const arr = [];
+                getDocs(query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "asc"))).then((snap) => {
+                    const arr: JSX.Element[] = [];
+                    snap.forEach((doc) => {
+                        arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
+                    })
+                    setMessages(arr);
                 })
-                setMessages(arr);
-            })
-                
+
             })
         }
-    },[props.serverId,router.isReady])
-   
-    
-    const handleClick =async()=>{
-        if(address){
-        console.log(Timestamp.now());
-        addDoc(collection(db,`servers/${props.serverId}/messages`),{
-            "Message":message,
-            "Sender":props.username,
-            "timeStamp": Timestamp.now()
-        }).then(()=>{
-            console.log("Sent");
-            setMessage("");
+    }, [props.serverId, router.isReady])
+
+
+    const handleClick = async () => {
+        if (address) {
+            console.log(Timestamp.now());
+            addDoc(collection(db, `servers/${props.serverId}/messages`), {
+                "Message": message,
+                "Sender": props.username,
+                "timeStamp": Timestamp.now()
+            }).then(() => {
+                console.log("Sent");
+                setMessage("");
             })
         }
-        else{
+        else {
             alert("Link Wallet");
         }
     }
-    useEffect(()=>{
-        if(props.serverId){
-            getDocs(query(collection(db,`members`),where("serverId","==",props.serverId),where("username","==",props.username))).then((snap)=>{
-                if(snap.docs.length>0){
+    useEffect(() => {
+        if (props.serverId) {
+            getDocs(query(collection(db, `members`), where("serverId", "==", props.serverId), where("username", "==", props.username))).then((snap) => {
+                if (snap.docs.length > 0) {
                     setJoin(true);
                 }
-                else{
+                else {
                     setJoin(false);
                 }
             })
         }
 
-    },[props.serverId,router.isReady])
-    useEffect(()=>{
-        if(props.serverId && router.isReady){
-            const q=query(collection(db,"members"),where("serverId","==",props.serverId));
-            const unsub=onSnapshot(q,(snapshot)=>{
-                
-               if(snapshot.docChanges().length>0){
-            getDocs(query(collection(db,`members`),where("serverId","==",props.serverId),where("username","==",props.username))).then((snap)=>{
-                if(snap.docs.length>0){
-                    setJoin(true);
-                }
-                else{
-                    setJoin(false);
+    }, [props.serverId, router.isReady])
+    useEffect(() => {
+        if (props.serverId && router.isReady) {
+            const q = query(collection(db, "members"), where("serverId", "==", props.serverId));
+            const unsub = onSnapshot(q, (snapshot) => {
+
+                if (snapshot.docChanges().length > 0) {
+                    getDocs(query(collection(db, `members`), where("serverId", "==", props.serverId), where("username", "==", props.username))).then((snap) => {
+                        if (snap.docs.length > 0) {
+                            setJoin(true);
+                        }
+                        else {
+                            setJoin(false);
+                        }
+                    })
                 }
             })
         }
-        })
-    }
 
-    },[props.serverId,router.isReady])
-    const removeUser=async()=>{
-        if(address){
-        getDocs(query(collection(db,`members`),where("serverId","==",props.serverId),where("username","==",props.username))).then((snap)=>{
-          
-               snap.forEach((docx)=>{
-                deleteDoc(doc(db,"members",docx.id))
-               })
-        
-        })
-    }
-    else{
-        alert("Link Wallet")
-    }
+    }, [props.serverId, router.isReady])
+    const removeUser = async () => {
+        if (address) {
+            getDocs(query(collection(db, `members`), where("serverId", "==", props.serverId), where("username", "==", props.username))).then((snap) => {
+
+                snap.forEach((docx) => {
+                    deleteDoc(doc(db, "members", docx.id))
+                })
+
+            })
+        }
+        else {
+            alert("Link Wallet")
+        }
     }
     const CommunityMenuToggleDrawer = (value: boolean) => {
         setChatToggleDrawer(value);
@@ -150,7 +150,7 @@ function ChatView(props: any) {
                         </div>
                     </div>
                     {/* <JoinBtn /> */}
-                    {joined&&( <div className='text-red-500 text-sm rounded-full hover:cursor-pointer border-red-500 border px-2 justify-center items-center flex '><button onClick={removeUser}>Disjoin</button></div>)}
+                    {joined && (<div className='text-red-500 text-sm rounded-full hover:cursor-pointer border-red-500 border px-2 justify-center items-center flex '><button onClick={removeUser}>Disjoin</button></div>)}
                 </div>
             </div>
             <div className=' flex flex-col overflow-y-scroll text-white p-3 h-full '>
@@ -167,7 +167,7 @@ function ChatView(props: any) {
                     <input
                         required
                         value={message}
-                        onChange={(e)=>{setMessage(e.target.value)}}
+                        onChange={(e) => { setMessage(e.target.value) }}
                         type={"text"}
                         step="0.1"
                         placeholder={"Enter The message"}

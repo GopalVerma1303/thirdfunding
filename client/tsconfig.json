@@ -25,8 +25,11 @@
     "**/*.tsx",
     "context/index.jsx",
     "pages/Start.jsx",
-    "pages/CampaignDetails/[PostId].jsx"
-, "components/CommunityPageComponents/ChatView.tsx", "components/Modals/AddRoomModal.jsx"  ],
+    "pages/CampaignDetails/[PostId].jsx",
+    "components/CommunityPageComponents/ChatView.tsx",
+    "components/Modals/AddRoomModal.jsx",
+    "components/CommunityPageComponents/ChatMessage.tsx"
+  ],
   "exclude": [
     "node_modules"
   ]
