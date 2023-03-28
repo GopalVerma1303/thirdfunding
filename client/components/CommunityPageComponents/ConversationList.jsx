@@ -6,17 +6,17 @@ import { collection, getDocs,doc, onSnapshot, query, where, orderBy, getDoc } fr
 import { db } from '../../firebase';
 import  { useRouter } from 'next/router';
 
-function ConversationList(props: any) {
+function ConversationList(props) {
     const [members,setMembers]=useState([]);
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
     const router=useRouter();
-    const CommunityMenuToggleDrawer = (value: boolean) => {
+    const CommunityMenuToggleDrawer = (value) => {
         setChatToggleDrawer(value);
     }
     useEffect(()=>{
         if(props.serverId && router.isReady){
         getDocs(query(collection(db,`members`),where("serverId","==",props.serverId))).then((snap)=>{
-            const arr:JSX.Element[]=[];
+            const arr=[];
             snap.forEach((doc)=>{
                arr.push( <ConversationTile name={doc.data().username} avatarUrl='https://cdn-icons-png.flaticon.com/512/149/149071.png' />)
             })
@@ -32,7 +32,7 @@ function ConversationList(props: any) {
                 
                if(snapshot.docChanges().length>0){
                    getDocs(query(collection(db,`members`),where("serverId","==",props.serverId))).then((snap)=>{
-                       const arr:JSX.Element[]=[];
+                       const arr=[];
                        snap.forEach((doc)=>{
                           arr.push( <ConversationTile name={doc.data().username} avatarUrl='https://cdn-icons-png.flaticon.com/512/149/149071.png' />)
                        })

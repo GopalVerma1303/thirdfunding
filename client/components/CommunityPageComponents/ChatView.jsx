@@ -13,7 +13,7 @@ import { db } from '../../firebase';
 import { useAddress } from '@thirdweb-dev/react';
 import { useRouter } from 'next/router';
 
-function ChatView(props: any) {
+function ChatView(props) {
     const [message, setMessage] = useState("");
     const [lOfMesage, setlom] = useState([]);
     const [serverName, setServer] = useState("");
@@ -25,7 +25,7 @@ function ChatView(props: any) {
     useEffect(() => {
         if (props.serverId && router.isReady) {
             getDocs(query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "asc"))).then((snap) => {
-                const arr: JSX.Element[] = [];
+                const arr= [];
                 snap.forEach((doc) => {
                     arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
                 })
@@ -53,7 +53,7 @@ function ChatView(props: any) {
             const unsub = onSnapshot(q, (snapshot) => {
                 const arr = [];
                 getDocs(query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "asc"))).then((snap) => {
-                    const arr: JSX.Element[] = [];
+                    const arr = [];
                     snap.forEach((doc) => {
                         arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
                     })
@@ -127,7 +127,7 @@ function ChatView(props: any) {
             alert("Link Wallet")
         }
     }
-    const CommunityMenuToggleDrawer = (value: boolean) => {
+    const CommunityMenuToggleDrawer = (value) => {
         setChatToggleDrawer(value);
     }
     return (

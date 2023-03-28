@@ -26,10 +26,10 @@
     "context/index.jsx",
     "pages/Start.jsx",
     "pages/CampaignDetails/[PostId].jsx",
-    "components/CommunityPageComponents/ChatView.tsx",
+    "components/CommunityPageComponents/ChatView.jsx",
     "components/Modals/AddRoomModal.jsx",
-    "components/CommunityPageComponents/ChatMessage.tsx"
-  ],
+    "components/CommunityPageComponents/ChatMessage.jsx"
+, "components/CommunityPageComponents/RoomList.jsx", "components/CommunityPageComponents/ConversationList.jsx"  ],
   "exclude": [
     "node_modules"
   ]

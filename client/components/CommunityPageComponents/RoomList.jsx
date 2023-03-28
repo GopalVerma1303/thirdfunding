@@ -11,7 +11,7 @@ import { type } from 'os'
 import { timeStamp } from 'console'
 import Link from 'next/link'
 
-function RoomList(props:any) {
+function RoomList(props) {
     const address=useAddress();
     const router=useRouter();
     const [rooms,setRooms]=useState([]);
