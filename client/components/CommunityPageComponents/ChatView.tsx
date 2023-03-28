@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 function ChatView(props: any) {
     const [message,setMessage]=useState("");
     const [lOfMesage,setlom]=useState([]);
+    const [serverName,setServer]=useState("");
     const [joined,setJoin]=useState(false);
     const router=useRouter();
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
@@ -32,6 +33,16 @@ function ChatView(props: any) {
             
             }).catch((err)=>{
                 console.log(err);
+            })
+        }
+        
+    },[props.serverId,router.isReady])
+    useEffect(()=>{
+        if(props.serverId && router.isReady){
+            getDoc(doc(db,"servers",props.serverId)).then((doc)=>{
+                if(doc.exists()){
+                setServer(doc.data().serverName);
+                }
             })
         }
         
@@ -134,7 +145,7 @@ function ChatView(props: any) {
                             />
                         </div>
                         <div>
-                            <p className="text-[15px] text-[#b2b4c9] font-semibold">Gopal Verma</p>
+                            <p className="text-[15px] text-[#b2b4c9] font-semibold">{serverName}</p>
                             {/* <p className="text-[13px] text-[#808191] font-bold">{name}</p> */}
                         </div>
                     </div>
