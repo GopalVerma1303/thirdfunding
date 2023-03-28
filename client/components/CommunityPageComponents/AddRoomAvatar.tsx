@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaPlus } from "react-icons/fa";
 import { useStateContext } from '../../miscellaneous_contexts';
-import AddRoomModal from '../Modals/AddRoomModal';
+
 import { db,app } from '../../firebase/index'
 import { addDoc,getDoc,deleteDoc,updateDoc, collection, where, query, onSnapshot, setDoc, doc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
