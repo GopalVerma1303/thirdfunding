@@ -27,7 +27,7 @@ function ChatView(props) {
             getDocs(query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "asc"))).then((snap) => {
                 const arr= [];
                 snap.forEach((doc) => {
-                    arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
+                    arr.push(<ChatMessage username={props.username} message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
                 })
                 setMessages(arr);
 
@@ -55,7 +55,7 @@ function ChatView(props) {
                 getDocs(query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "asc"))).then((snap) => {
                     const arr = [];
                     snap.forEach((doc) => {
-                        arr.push(<ChatMessage message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
+                        arr.push(<ChatMessage username={props.username} message={doc.data().Message} sender={doc.data().Sender} imageUrl={`https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg`} created_at={doc.data().timeStamp} />)
                     })
                     setMessages(arr);
                 })
