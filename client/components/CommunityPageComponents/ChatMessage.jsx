@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-const ChatMessage = ({ username, message, sender, imageUrl, created_at }: Props) => {
+const ChatMessage = ({ username, message, sender, imageUrl, created_at }) => {
     const user = "Gopal Verma"
     return (
         <div className={`flex w-full my-2 ${sender === username && "justify-end ml-auto"}`}>
