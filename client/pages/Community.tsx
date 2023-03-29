@@ -60,7 +60,7 @@ function Community() {
       </div>
       <ChatView serverId={router.query["server"]} username={user} />
       {
-        chatToggleDrawer && <ConversationInbox serverId={router.query["server"]} username={user} /> // Confusion
+        chatToggleDrawer && <ConversationInbox  /> // Confusion
       }
     </div>
   )
