@@ -29,7 +29,7 @@
     "components/CommunityPageComponents/ChatView.jsx",
     "components/Modals/AddRoomModal.jsx",
     "components/CommunityPageComponents/ChatMessage.jsx"
-, "components/CommunityPageComponents/RoomList.jsx", "components/CommunityPageComponents/ConversationList.jsx"  ],
+, "components/CommunityPageComponents/RoomList.jsx", "components/CommunityPageComponents/ConversationList.jsx", "pages/News.jsx"  ],
   "exclude": [
     "node_modules"
   ]

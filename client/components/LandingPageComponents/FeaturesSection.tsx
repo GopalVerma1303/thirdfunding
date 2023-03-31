@@ -55,7 +55,7 @@ function FeaturesSection() {
                 <FeatureCard
                     Icon={MdNewspaper}
                     title="News"
-                    description="Our platform allows you to explore campaigns that align with your interests. Whether you're passionate about the environment, social justice, or technology, you can find a campaign that resonates with you."
+                    description="Our news section covers a broad range of topics related to cryptocurrencies, including updates on major cryptocurrencies such as Bitcoin, Ethereum, and Litecoin, as well as new and emerging cryptocurrencies that are gaining traction in the market. We also cover news related to blockchain technology, decentralized finance (DeFi), and the broader crypto ecosystem."
                 />
                 <FeatureCard
                     Icon={MdPerson}

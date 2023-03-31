@@ -22,7 +22,7 @@ function PoweredBySection() {
                     <Image className='rounded-full' src="/coinbaselogo.png" width={100} height={100} alt={'Thirdfunding'} />
                 </a>
                 <a href='https://gun.eco/'>
-                    <Image className=' invert ' src="/gunjslogo.png" width={100} height={100} alt={'Thirdfunding'} />
+                    <Image className=' rounded-full ' src="/firebaselogo.png" width={100} height={100} alt={'Thirdfunding'} />
                 </a>
                 <a href='https://mediastack.com/'>
                     <Image className='rounded-full' src="/mediastacklogo.png" width={100} height={100} alt={'Thirdfunding'} />
