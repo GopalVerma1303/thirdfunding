@@ -166,9 +166,12 @@ function ChatView(props) {
             }
 
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
-                <form className='flex items-center mx-5'>
-                    <BsFillChatLeftDotsFill className='text-[20px] text-[#666d7b] mr-2' />
-                    <input
+                  {(address && joined)?(
+               <form className='flex items-center mx-5'>
+             
+                       
+                        <BsFillChatLeftDotsFill className='text-[20px] text-[#666d7b] mr-2' />
+                        <input
                         required
                         value={message}
                         onChange={(e) => { setMessage(e.target.value) }}
@@ -180,6 +183,7 @@ function ChatView(props) {
                     </input>
                     <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' onClick={handleClick} />
                 </form>
+                ):<></>}
             </div>
         </div>
     )
