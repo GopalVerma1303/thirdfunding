@@ -145,13 +145,19 @@ function ChatView(props) {
                                 <img
                                     className="rounded-full h-[30px] w-[30px]"
                                     src={"https://cdn-icons-png.flaticon.com/512/149/149071.png"}
-                                    alt={`Avatar of Gopal Verma`}
-                                // alt={`Avatar of ${name}`}
+                                    alt={`Avatar`}
+                                // alt={`Avatar of ${p}`}
                                 />
                             </div>
-                            <div>
-                                <p className="text-[15px] text-[#b2b4c9] font-semibold">{serverName}</p>
-                                {/* <p className="text-[13px] text-[#808191] font-bold">{name}</p> */}
+                            <div className=''>
+                                <div>
+                                    <p className="text-[15px] text-[#b2b4c9] font-semibold">{serverName}</p>
+                                    {/* <p className="text-[13px] text-[#808191] font-bold">{name}</p> */}
+                                </div>
+                                <div>
+                                    <p className="text-[10px] text-[#7a7b8a] font-semibold">{props.serverId}</p>
+                                    {/* <p className="text-[13px] text-[#808191] font-bold">{name}</p> */}
+                                </div>
                             </div>
                         </div>
                     }
