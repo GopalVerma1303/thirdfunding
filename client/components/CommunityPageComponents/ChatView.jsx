@@ -131,23 +131,26 @@ function ChatView(props) {
     }
     return (
         <div className=' w-full h-full bg-[#2d2d39] md:rounded-r-[10px] overflow-y-scroll scrollbar-none flex flex-col justify-between'>
-            <div className='w-full top-0 relative p-1 bg-[#3e3e4e] flex items-center'>
+            <div className='w-full top-0 relative m-1 bg-[#3e3e4e] flex items-center'>
                 <HiArrowLeft onClick={() => CommunityMenuToggleDrawer(!chatToggleDrawer)} className='mx-5  text-[20px] text-[#808191] md:hidden' />
                 <div className=' flex justify-between w-full items-center pr-5'>
-                    <div className="bg-[#3e3e4e] rounded-lg flex justify-start items-center p-2 gap-2 hover:cursor-pointer">
-                        <div>
-                            <img
-                                className="rounded-full h-[30px] w-[30px]"
-                                src={"https://cdn-icons-png.flaticon.com/512/149/149071.png"}
-                                alt={`Avatar of Gopal Verma`}
-                            // alt={`Avatar of ${name}`}
-                            />
+                    {
+                        props.serverId && <div className="bg-[#3e3e4e] rounded-lg flex justify-start items-center p-2 gap-2 hover:cursor-pointer">
+                            <div>
+                                <img
+                                    className="rounded-full h-[30px] w-[30px]"
+                                    src={"https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+                                    alt={`Avatar of Gopal Verma`}
+                                // alt={`Avatar of ${name}`}
+                                />
+                            </div>
+                            <div>
+                                <p className="text-[15px] text-[#b2b4c9] font-semibold">{serverName}</p>
+                                {/* <p className="text-[13px] text-[#808191] font-bold">{name}</p> */}
+                            </div>
                         </div>
-                        <div>
-                            <p className="text-[15px] text-[#b2b4c9] font-semibold">{serverName}</p>
-                            {/* <p className="text-[13px] text-[#808191] font-bold">{name}</p> */}
-                        </div>
-                    </div>
+                    }
+
                     {/* <JoinBtn /> */}
                     {joined && (<div className='text-red-500 text-sm rounded-full hover:cursor-pointer border-red-500 border px-2 justify-center items-center flex '><button onClick={removeUser}>Disjoin</button></div>)}
                 </div>
@@ -166,24 +169,22 @@ function ChatView(props) {
             }
 
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
-                  {(address && joined)?(
-               <form className='flex items-center mx-5'>
-             
-                       
+                {(address && joined) && (
+                    <form className='flex items-center mx-5'>
                         <BsFillChatLeftDotsFill className='text-[20px] text-[#666d7b] mr-2' />
                         <input
-                        required
-                        value={message}
-                        onChange={(e) => { setMessage(e.target.value) }}
-                        type={"text"}
-                        step="0.1"
-                        placeholder={"Enter The message"}
-                        className="flex w-full py-[15px] sm:px-[px]  outline-none border-[1px] border-[#3E3E4E] bg-transparent font-epilogue text-white text-[14px] placeholder:text-[#676f7e] rounded-[10px] "
-                    >
-                    </input>
-                    <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' onClick={handleClick} />
-                </form>
-                ):<></>}
+                            required
+                            value={message}
+                            onChange={(e) => { setMessage(e.target.value) }}
+                            type={"text"}
+                            step="0.1"
+                            placeholder={"Enter The message"}
+                            className="flex w-full py-[15px] sm:px-[px]  outline-none border-[1px] border-[#3E3E4E] bg-transparent font-epilogue text-white text-[14px] placeholder:text-[#676f7e] rounded-[10px] "
+                        >
+                        </input>
+                        <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' onClick={handleClick} />
+                    </form>
+                )}
             </div>
         </div>
     )
