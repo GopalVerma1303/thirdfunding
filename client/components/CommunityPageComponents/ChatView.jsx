@@ -35,7 +35,6 @@ function ChatView(props) {
                 console.log(err);
             })
         }
-
     }, [props.serverId, router.isReady])
     useEffect(() => {
         if (props.serverId && router.isReady) {
@@ -153,14 +152,19 @@ function ChatView(props) {
                     {joined && (<div className='text-red-500 text-sm rounded-full hover:cursor-pointer border-red-500 border px-2 justify-center items-center flex '><button onClick={removeUser}>Disjoin</button></div>)}
                 </div>
             </div>
-            <div className=' flex flex-col overflow-y-scroll text-white p-3 h-full '>
-                {/* {
-                    Message.map(e => (
-                        <ChatMessage message={e.message} sender={e.username} imageUrl={e.profilePic} created_at={e.created_at} />
-                    ))
-                } */}
-                {messages}
-            </div>
+            {
+                (props.serverId == null) ? (
+                    <div className=' flex flex-col overflow-y-scroll text-[#666D7B] font-bold p-3 h-full justify-center items-center  '>
+                        <img src='https://www.pngmart.com/files/16/Speech-Chat-Icon-Transparent-PNG.png' className=' w-[100px] h-[100px] opacity-60' />
+                        <p>Start a new chat!</p>
+                    </div>
+                ) : (
+                    <div className=' flex flex-col overflow-y-scroll text-white p-3 h-full '>
+                        {messages}
+                    </div>
+                )
+            }
+
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
                 <form className='flex items-center mx-5'>
                     <BsFillChatLeftDotsFill className='text-[20px] text-[#666d7b] mr-2' />
