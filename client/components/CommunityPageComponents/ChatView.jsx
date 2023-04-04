@@ -14,6 +14,8 @@ import { useAddress } from '@thirdweb-dev/react';
 import { useRouter } from 'next/router';
 
 function ChatView(props) {
+    console.log(props.serverId);
+    
     const [message, setMessage] = useState("");
     const [lOfMesage, setlom] = useState([]);
     const [serverName, setServer] = useState("");
@@ -21,9 +23,10 @@ function ChatView(props) {
     const router = useRouter();
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
     const address = useAddress();
+    console.log(address)
     const [messages, setMessages] = useState([]);
     useEffect(() => {
-        if (props.serverId && router.isReady) {
+        if (props.serverId && router.isReady && props.username) {
             getDocs(query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "asc"))).then((snap) => {
                 const arr = [];
                 snap.forEach((doc) => {
@@ -35,7 +38,7 @@ function ChatView(props) {
                 console.log(err);
             })
         }
-    }, [props.serverId, router.isReady])
+    }, [props.serverId, router.isReady,props.username])
     useEffect(() => {
         if (props.serverId && router.isReady) {
             getDoc(doc(db, "servers", props.serverId)).then((doc) => {
@@ -47,7 +50,7 @@ function ChatView(props) {
 
     }, [props.serverId, router.isReady])
     useEffect(() => {
-        if (router.isReady && props.serverId) {
+        if (router.isReady && props.serverId && props.username ) {
             const q = query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "desc"));
             const unsub = onSnapshot(q, (snapshot) => {
                 const arr = [];
@@ -61,10 +64,11 @@ function ChatView(props) {
 
             })
         }
-    }, [props.serverId, router.isReady])
+    }, [props.serverId, router.isReady,props.username])
 
 
     const handleClick = async () => {
+  
         if (address) {
             console.log(Timestamp.now());
             addDoc(collection(db, `servers/${props.serverId}/messages`), {
@@ -80,8 +84,9 @@ function ChatView(props) {
             alert("Link Wallet");
         }
     }
+   
     useEffect(() => {
-        if (props.serverId) {
+        if (props.serverId &&router.isReady && props.username) {
             getDocs(query(collection(db, `members`), where("serverId", "==", props.serverId), where("username", "==", props.username))).then((snap) => {
                 if (snap.docs.length > 0) {
                     setJoin(true);
@@ -92,9 +97,9 @@ function ChatView(props) {
             })
         }
 
-    }, [props.serverId, router.isReady])
+    }, [props.username,props.serverId, router.isReady])
     useEffect(() => {
-        if (props.serverId && router.isReady) {
+        if (props.serverId && router.isReady && props.username) {
             const q = query(collection(db, "members"), where("serverId", "==", props.serverId));
             const unsub = onSnapshot(q, (snapshot) => {
 
@@ -111,7 +116,7 @@ function ChatView(props) {
             })
         }
 
-    }, [props.serverId, router.isReady])
+    }, [props.serverId, router.isReady, props.username])
     const removeUser = async () => {
         if (address) {
             getDocs(query(collection(db, `members`), where("serverId", "==", props.serverId), where("username", "==", props.username))).then((snap) => {
@@ -152,7 +157,7 @@ function ChatView(props) {
                     }
 
                     {/* <JoinBtn /> */}
-                    {joined && (<div className='text-red-500 text-sm rounded-full hover:cursor-pointer border-red-500 border px-2 justify-center items-center flex '><button onClick={removeUser}>Disjoin</button></div>)}
+                    {(joined && props.serverId) && (<div className='text-red-500 text-sm rounded-full hover:cursor-pointer border-red-500 border px-2 justify-center items-center flex '><button onClick={removeUser}>Disjoin</button></div>)}
                 </div>
             </div>
             {
@@ -169,8 +174,8 @@ function ChatView(props) {
             }
 
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
-                {(address && joined) && (
-                    <form className='flex items-center mx-5'>
+                {(address && joined && props.serverId) && (
+                    <div onKeyDown={(e)=>{(e.key==='Enter')&&handleClick()}} className='flex items-center mx-5'>
                         <BsFillChatLeftDotsFill className='text-[20px] text-[#666d7b] mr-2' />
                         <input
                             required
@@ -182,8 +187,8 @@ function ChatView(props) {
                             className="flex w-full py-[15px] sm:px-[px]  outline-none border-[1px] border-[#3E3E4E] bg-transparent font-epilogue text-white text-[14px] placeholder:text-[#676f7e] rounded-[10px] "
                         >
                         </input>
-                        <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' onClick={handleClick} />
-                    </form>
+                        <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' onClick={handleClick}  />
+                    </div>
                 )}
             </div>
         </div>

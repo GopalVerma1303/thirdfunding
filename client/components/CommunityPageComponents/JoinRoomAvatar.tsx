@@ -1,5 +1,5 @@
 import { useAddress } from '@thirdweb-dev/react';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { FaLink } from "react-icons/fa";
 import { db } from '../../firebase';
@@ -12,12 +12,26 @@ function JoinRoomAvatar(props: any ) {
     const [name, setName] = useState("")
     const address=useAddress();
     const handleClick =async()=>{
-        addDoc(collection(db,"members"),{
-            "username":props.username,
-            "walletAddress":address,
-            "serverId":name,
-            "timeStamp":new Date()
-        }).then(()=>{alert("Joined The Group"),setShowModal(false)})
+        if(address){
+        getDocs(query(collection(db, `members`), where("serverId", "==", name), where("username", "==", props.username))).then((snap) => {
+            if (snap.docs.length > 0) {
+                alert("Already Joined group");
+            }
+            else {
+            
+                addDoc(collection(db,"members"),{
+                    "username":props.username,
+                    "walletAddress":address,
+                    "serverId":name,
+                    "timeStamp":new Date()
+                }).then(()=>{alert("Joined The Group"),setShowModal(false)})
+            }
+        })
+    }
+    else{
+        alert("Connect the Wallet");
+    }
+       
     }
     return (
         <>
