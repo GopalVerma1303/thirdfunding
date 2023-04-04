@@ -10,8 +10,7 @@ import { db, app } from '../firebase/index'
 import { addDoc, getDoc, deleteDoc, updateDoc, collection, where, query, onSnapshot, setDoc, doc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { type } from 'os'
-
-
+import ConnectWalletModal from '../components/ConnectWalletModal';
 
 function Community() {
   const router = useRouter();
@@ -48,21 +47,29 @@ function Community() {
 
   }, [address, router.isReady])
 
-
+  const [showConnectWalletModal, setShowConnectWalletModal] = useState(false)
+  useEffect(() => {
+    address != null ? setShowConnectWalletModal(false) : setShowConnectWalletModal(true)
+  }, [address])
 
   const { chatToggleDrawer } = useStateContext();
   return (
-    <div className='flex justify-start flex-row rounded-[10px] sm:h-[82vh] h-[89vh] top-[70px] sm:top-0 absolute  left-0 right-0  sm:relative'>
-
-      <div className='flex-row hidden md:inline-flex'>
-        <RoomList userName={user}/>
-        <ConversationList serverId={router.query["server"]} username={user} />
+    <>
+    {
+      showConnectWalletModal && <ConnectWalletModal />
+    }
+      <div className='flex justify-start flex-row rounded-[10px] sm:h-[82vh] h-[89vh] top-[70px] sm:top-0 absolute  left-0 right-0  sm:relative'>
+        <div className='flex-row hidden md:inline-flex'>
+          <RoomList userName={user} />
+          <ConversationList serverId={router.query["server"]} username={user} />
+        </div>
+        <ChatView serverId={router.query["server"]} username={user} />
+        {
+          chatToggleDrawer && <ConversationInbox serverId={router.query["server"]} username={user} /> // Confusion
+        }
       </div>
-      <ChatView serverId={router.query["server"]} username={user} />
-      {
-        chatToggleDrawer && <ConversationInbox serverId={router.query["server"]} username={user}/> // Confusion
-      }
-    </div>
+    </>
+
   )
 }
 

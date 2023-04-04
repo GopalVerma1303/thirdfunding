@@ -4,6 +4,7 @@ import FundCard from './FundCard';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+
 const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
     const router = useRouter();
     const handleNavigate = (campaign) => {

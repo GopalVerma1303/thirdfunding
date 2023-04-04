@@ -10,6 +10,8 @@ import { calculateBarPercentage, daysLeft } from '../../utils';
 import { thirdweb } from '../../assets';
 import { useContract } from "@thirdweb-dev/react";
 import Web3 from 'web3';
+import { ConnectWallet } from '@thirdweb-dev/react';
+import ConnectWalletModal from '../../components/ConnectWalletModal';
 
 function CampaignDetails() {
     const router = useRouter()
@@ -67,6 +69,11 @@ function CampaignDetails() {
             fetchCampaignById(PostId);
         }
     }, [contract])
+
+    const [showConnectWalletModal, setShowConnectWalletModal] = useState(false)
+    useEffect(() => {
+        address != null ? setShowConnectWalletModal(false) : setShowConnectWalletModal(true)
+    }, [address])
 
     return (
         <div>
@@ -161,13 +168,15 @@ function CampaignDetails() {
                                                 <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">Back it because you believe in it.</h4>
                                                 <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">Support the project for no reward, just because it speaks to you.</p>
                                             </div>
+                                            {
+                                                showConnectWalletModal ? <ConnectWallet /> : <CustomButton
+                                                    btnType="button"
+                                                    title="Fund Campaign"
+                                                    styles="w-full bg-[#8c6dfd]"
+                                                    handleClick={handleDonate}
+                                                />
+                                            }
 
-                                            <CustomButton
-                                                btnType="button"
-                                                title="Fund Campaign"
-                                                styles="w-full bg-[#8c6dfd]"
-                                                handleClick={handleDonate}
-                                            />
                                         </div>
                                     </div>
                                 </div>
