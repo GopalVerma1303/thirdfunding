@@ -7,6 +7,7 @@ import { db } from '../../firebase';
 import  { useRouter } from 'next/router';
 
 function ConversationList(props) {
+    console.log(props.serverId);
     const [members,setMembers]=useState([]);
     const { chatToggleDrawer, setChatToggleDrawer } = useStateContext();
     const router=useRouter();
@@ -14,6 +15,7 @@ function ConversationList(props) {
         setChatToggleDrawer(value);
     }
     useEffect(()=>{
+      
         if(props.serverId && router.isReady){
         getDocs(query(collection(db,`members`),where("serverId","==",props.serverId))).then((snap)=>{
             const arr=[];
@@ -22,14 +24,18 @@ function ConversationList(props) {
             })
             setMembers(arr);
         })
+        
+    }
+    else{
+        setMembers([]);
     }
     },[props.serverId,router.isReady])
    
     useEffect(()=>{
+      
         if(props.serverId && router.isReady){
-            const q=query(collection(db,"members"),where("serverId","==",props.serverId));
+            const q=query(collection(db,"members"));
             const unsub=onSnapshot(q,(snapshot)=>{
-                
                if(snapshot.docChanges().length>0){
                    getDocs(query(collection(db,`members`),where("serverId","==",props.serverId))).then((snap)=>{
                        const arr=[];
@@ -39,13 +45,10 @@ function ConversationList(props) {
                        setMembers(arr);
                    })
                }
-      
-                
-              
-            
-                
-                
             })
+    }
+    else{
+        setMembers([]);
     }
     },[props.serverId,router.isReady])
    //Add Realtime member add

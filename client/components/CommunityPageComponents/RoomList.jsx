@@ -31,12 +31,10 @@ function RoomList(props) {
         }
     }, [router.isReady])
     useEffect(() => {
+        if(router.isReady){
 
         const q = query(collection(db, "servers"));
         const unsub = onSnapshot(q, (snapshot) => {
-
-
-
 
             if (snapshot.docChanges().length > 0) {
                 getDocs(query(collection(db, `servers`), orderBy("timeStamp", "desc"))).then((snap) => {
@@ -54,7 +52,7 @@ function RoomList(props) {
 
 
 
-        })
+        })}
 
     }, [router.isReady])
 

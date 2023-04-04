@@ -55,7 +55,7 @@ function Community() {
     <div className='flex justify-start flex-row rounded-[10px] sm:h-[82vh] h-[89vh] top-[70px] sm:top-0 absolute  left-0 right-0  sm:relative'>
 
       <div className='flex-row hidden md:inline-flex'>
-        <RoomList userName={user} />
+        <RoomList userName={user}/>
         <ConversationList serverId={router.query["server"]} username={user} />
       </div>
       <ChatView serverId={router.query["server"]} username={user} />
