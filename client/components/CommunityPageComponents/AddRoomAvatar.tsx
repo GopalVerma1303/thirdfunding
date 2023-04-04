@@ -2,51 +2,46 @@ import React, { useState } from 'react'
 import { FaPlus } from "react-icons/fa";
 import { useStateContext } from '../../miscellaneous_contexts';
 
-import { db,app } from '../../firebase/index'
-import { addDoc,getDoc,deleteDoc,updateDoc, collection, where, query, onSnapshot, setDoc, doc } from 'firebase/firestore'
+import { db, app } from '../../firebase/index'
+import { addDoc, getDoc, deleteDoc, updateDoc, collection, where, query, onSnapshot, setDoc, doc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { useAddress } from '@thirdweb-dev/react';
 
-function AddRoomAvatar(props:any) {
+function AddRoomAvatar(props: any) {
     const { isAddRoomModalOpen, setIsAddRoomModalOpen } = useStateContext()
     const [showModal, setShowModal] = useState(false);
- 
-    const address=useAddress();
-    const router=useRouter();
+
+    const address = useAddress();
+    const router = useRouter();
     const [name, setName] = useState("");
     // const [showModal, setShowModal] = useState(false);
-
-   
-    
-   
-    
     const handleSubmit = async () => {
-   
-    //     // TODO: submit the form data to say Hi to the user
-    if(address){
-        addDoc(collection(db,`servers`),{
-            "serverName":name,
-            "timeStamp":new Date()
-        }).then((server)=>{
-            setDoc(doc(db,"users",address,"servers",server.id),{
-                "serverName":name,
-                "serverId":server.id,
-                "timeStamp":new Date()
-            }).then(()=>{
-                addDoc(collection(db,'members'),{
-                    "walletAddress":address,
-                    "serverId":server.id,
-                    "username":props.username,
-                    "timeStamp":new Date()
+
+        //     // TODO: submit the form data to say Hi to the user
+        if (address) {
+            addDoc(collection(db, `servers`), {
+                "serverName": name,
+                "timeStamp": new Date()
+            }).then((server) => {
+                setDoc(doc(db, "users", address, "servers", server.id), {
+                    "serverName": name,
+                    "serverId": server.id,
+                    "timeStamp": new Date()
+                }).then(() => {
+                    addDoc(collection(db, 'members'), {
+                        "walletAddress": address,
+                        "serverId": server.id,
+                        "username": props.username,
+                        "timeStamp": new Date()
+                    })
+                    console.log("Done Is");
+
                 })
-                console.log("Done Is");
-                
             })
-        })
-    }
-    else{
-        alert("Link Wallet");
-    }
+        }
+        else {
+            alert("Link Wallet");
+        }
         setShowModal(!showModal);
     };
 

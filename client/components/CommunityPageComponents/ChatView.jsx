@@ -7,7 +7,7 @@ import ChatMessage from './ChatMessage';
 import Message from '../../assets/chat';
 import { useStateContext } from '../../miscellaneous_contexts'
 import JoinBtn from './JoinBtn';
-
+import Avatar from 'react-avatar';
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, Timestamp, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAddress } from '@thirdweb-dev/react';
@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 
 function ChatView(props) {
     console.log(props.serverId);
-    
+
     const [message, setMessage] = useState("");
     const [lOfMesage, setlom] = useState([]);
     const [serverName, setServer] = useState("");
@@ -38,7 +38,7 @@ function ChatView(props) {
                 console.log(err);
             })
         }
-    }, [props.serverId, router.isReady,props.username])
+    }, [props.serverId, router.isReady, props.username])
     useEffect(() => {
         if (props.serverId && router.isReady) {
             getDoc(doc(db, "servers", props.serverId)).then((doc) => {
@@ -50,7 +50,7 @@ function ChatView(props) {
 
     }, [props.serverId, router.isReady])
     useEffect(() => {
-        if (router.isReady && props.serverId && props.username ) {
+        if (router.isReady && props.serverId && props.username) {
             const q = query(collection(db, `servers/${props.serverId}/messages`), orderBy("timeStamp", "desc"));
             const unsub = onSnapshot(q, (snapshot) => {
                 const arr = [];
@@ -64,11 +64,11 @@ function ChatView(props) {
 
             })
         }
-    }, [props.serverId, router.isReady,props.username])
+    }, [props.serverId, router.isReady, props.username])
 
 
     const handleClick = async () => {
-  
+
         if (address) {
             console.log(Timestamp.now());
             addDoc(collection(db, `servers/${props.serverId}/messages`), {
@@ -84,9 +84,9 @@ function ChatView(props) {
             alert("Link Wallet");
         }
     }
-   
+
     useEffect(() => {
-        if (props.serverId &&router.isReady && props.username) {
+        if (props.serverId && router.isReady && props.username) {
             getDocs(query(collection(db, `members`), where("serverId", "==", props.serverId), where("username", "==", props.username))).then((snap) => {
                 if (snap.docs.length > 0) {
                     setJoin(true);
@@ -97,7 +97,7 @@ function ChatView(props) {
             })
         }
 
-    }, [props.username,props.serverId, router.isReady])
+    }, [props.username, props.serverId, router.isReady])
     useEffect(() => {
         if (props.serverId && router.isReady && props.username) {
             const q = query(collection(db, "members"), where("serverId", "==", props.serverId));
@@ -142,12 +142,7 @@ function ChatView(props) {
                     {
                         props.serverId && <div className="bg-[#3e3e4e] rounded-lg flex justify-start items-center p-2 gap-2 hover:cursor-pointer">
                             <div>
-                                <img
-                                    className="rounded-full h-[30px] w-[30px]"
-                                    src={"https://cdn-icons-png.flaticon.com/512/149/149071.png"}
-                                    alt={`Avatar`}
-                                // alt={`Avatar of ${p}`}
-                                />
+                                <Avatar name={serverName} size="40" round maxInitials={2} className="mx-auto" />
                             </div>
                             <div className=''>
                                 <div>
@@ -181,7 +176,7 @@ function ChatView(props) {
 
             <div className='w-full top-0 relative bg-[#3e3e4e]'>
                 {(address && joined && props.serverId) && (
-                    <div onKeyDown={(e)=>{(e.key==='Enter')&&handleClick()}} className='flex items-center mx-5'>
+                    <div onKeyDown={(e) => { (e.key === 'Enter') && handleClick() }} className='flex items-center mx-5'>
                         <BsFillChatLeftDotsFill className='text-[20px] text-[#666d7b] mr-2' />
                         <input
                             required
@@ -193,7 +188,7 @@ function ChatView(props) {
                             className="flex w-full py-[15px] sm:px-[px]  outline-none border-[1px] border-[#3E3E4E] bg-transparent font-epilogue text-white text-[14px] placeholder:text-[#676f7e] rounded-[10px] "
                         >
                         </input>
-                        <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' onClick={handleClick}  />
+                        <FaTelegramPlane className='mx-1 text-[25px] text-[#808191] hover:cursor-pointer' onClick={handleClick} />
                     </div>
                 )}
             </div>
