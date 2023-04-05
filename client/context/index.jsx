@@ -51,6 +51,7 @@ export const StateContextProvider = ({ children }) => {
             owner: campaign.owner,
             title: campaign.title,
             description: campaign.description,
+            category: campaign.category,
             target: ethers.utils.formatEther(campaign.target.toString()),
             deadline: campaign.deadline.toNumber(),
             amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),

@@ -7,6 +7,7 @@ import { useStateContext } from '../context'
 import { checkIfImage } from '../utils';
 import { useNavigate } from 'react-router-dom';
 import ConnectWalletModal from '../components/ConnectWalletModal';
+import { useRouter } from 'next/router';
 
 function Start() {
 
@@ -24,6 +25,7 @@ function Start() {
   });
   const { address } = useStateContext();
   const [showConnectWalletModal, setShowConnectWalletModal] = useState(false)
+  const router = useRouter();
   useEffect(() => {
     address != null ? setShowConnectWalletModal(false) : setShowConnectWalletModal(true)
   }, [address])
@@ -36,6 +38,7 @@ function Start() {
         console.log(form);
         await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18) });
         setIsLoading(false);
+        router.push('/Explore');
       } else {
         alert("Provide valid image URL")
         setForm({ ...form, image: '' });

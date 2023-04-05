@@ -44,10 +44,13 @@ function CampaignDetails() {
 
 
     const handleDonate = async () => {
-        setIsLoading(true);
-        await donate(PostId, amount);
-        router.push('/Explore')
-        setIsLoading(false);
+        if (amount == "") alert("Enter valid amount!")
+        else {
+            setIsLoading(true);
+            await donate(PostId, amount);
+            router.push('/Explore')
+            setIsLoading(false);
+        }
     }
 
     const fetchCampaignById = async (postId) => {
